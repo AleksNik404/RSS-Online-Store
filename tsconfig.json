@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "module": "es6",
+    "target": "es5",
+    "allowJs": true,
+    "lib": ["esnext", "dom"],
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    // "strict": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "types": ["react/next", "react-dom/next"]
+  },
+  "include": ["src"]
+  // "files": ["src/index.tsx"]
+}
