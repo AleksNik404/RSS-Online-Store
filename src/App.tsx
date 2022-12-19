@@ -1,22 +1,25 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { CartPage, DetailsPage, ErrorPage, ProductsPage } from './pages';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Main from './components/Main';
+import styled from '@emotion/styled';
 
 const App = () => {
   return (
-    <>
+    <Container>
       <Header />
-      <Routes>
-        <Route path="/" element={<ProductsPage />} />
-        <Route path="/:id" element={<DetailsPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+      <Main />
       <Footer />
-    </>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+  width: 100%;
+`;
 
 export default App;
