@@ -59,10 +59,12 @@
     "@babel/polyfill": "^7.12.1",
     "@emotion/css": "^11.10.5",
     "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@reduxjs/toolkit": "^1.9.1",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.7.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.5.0"
   }
