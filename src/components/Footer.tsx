@@ -23,6 +23,7 @@ const Footer = () => {
 
 const Container = styled.div`
   padding: 0 40px;
+  margin-top: 200px;
 
   div {
     display: flex;

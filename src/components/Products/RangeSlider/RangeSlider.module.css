@@ -1,0 +1,16 @@
+.sliderBox {
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* justify-content: center; */
+}
+
+.slider {
+  width: 100%;
+}
+
+.amount {
+  display: flex;
+  justify-content: space-between;
+}

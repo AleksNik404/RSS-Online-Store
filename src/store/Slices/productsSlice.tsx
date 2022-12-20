@@ -5,6 +5,7 @@ import { products } from '../data/data2';
 
 const initialState = {
   products,
+  filterProducts: products,
 };
 
 const productsSlice = createSlice({
