@@ -21,9 +21,9 @@ const ProductsPage = () => {
 const Container = styled.div`
   padding: 0 40px;
 
-  .products {
+  & > .products {
     display: grid;
-    grid-template-columns: minmax(min-content, 300px) 1fr;
+    grid-template-columns: minmax(160px, 300px) 1fr;
     gap: 30px;
   }
 `;

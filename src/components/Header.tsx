@@ -15,9 +15,9 @@ const Header = () => {
         <Link to="/">
           <h1 className="">Online Store</h1>
         </Link>
-        <h3>Cart total: ${total_amount}</h3>
         <Link to="/cart">
           <div className="cart">
+            <p className="cart-total">${total_amount} -</p>
             Cart <MdShoppingCart />
           </div>
         </Link>
@@ -28,6 +28,7 @@ const Header = () => {
 
 const Container = styled.div`
   padding: 0 40px;
+  margin-bottom: 50px;
 
   .header {
     display: flex;
@@ -40,6 +41,11 @@ const Container = styled.div`
     align-items: center;
     gap: 5px;
     /* padding: 5px 10px; */
+  }
+
+  .cart-total {
+    width: 70px;
+    text-align: right;
   }
 `;
 
