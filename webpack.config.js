@@ -9,16 +9,17 @@ const isProduction = process.env.NODE_ENV == 'production';
 const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader';
 
 const config = {
-  entry: ['@babel/polyfill', path.resolve(__dirname, './src/index.tsx')],
+  entry: path.resolve(__dirname, './src/index.tsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[hash].js',
+    publicPath: '/',
     clean: true,
   },
   devServer: {
     open: true,
     host: 'localhost',
-    hot: true,
+    // hot: true,
 
     historyApiFallback: true,
   },
@@ -26,7 +27,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
     }),
-
+   
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],

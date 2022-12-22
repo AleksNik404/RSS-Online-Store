@@ -1,7 +1,7 @@
 export const products = [
   {
     id: 1,
-    title: 'The Mandalorian™ and The Child (Deluxe)',
+    title: 'The Mandalorian™ and The Child',
     description:
       'It is time to witness the Mandalorian and his little sidekick, the Child’s extraordinary journey in the dangerous galaxy with the launch of the new season of the highly acclaimed Star Wars series The Mandalorian!   ',
     description2:
@@ -70,7 +70,7 @@ export const products = [
   },
   {
     id: 4,
-    title: 'R2-D2 Deluxe',
+    title: 'R2-D2',
     description:
       'Everyone`s favorite droid from the galaxy far, far away is ready for adventure with intricate articulation and fantastic detailing. The feisty blue and white astromech rolls right off the big screen, with sequencing lights and a swiveling dome that features various moveable ports and hinged panels. ',
     description2:

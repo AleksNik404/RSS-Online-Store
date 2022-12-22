@@ -1,14 +1,16 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const ErrorPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
-    const timer = setTimeout(() => navigate('/', { replace: true }), 5000);
-    return () => clearTimeout(timer);
-  }, [navigate]);
+  // console.log(searchParams.get('a'));
+  // console.log(searchParams.set('sort'));
+  // console.log(searchParams);
+  // console.log(location);
 
   return (
     <div>

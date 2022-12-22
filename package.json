@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/AleksNik404/RSS-Online-Store/issues"
   },
-  "homepage": "https://github.com/AleksNik404/RSS-Online-Store#readme",
+  "homepage": "https://github.com/AleksNik404/RSS-Online-Store/",
   "devDependencies": {
     "@babel/core": "^7.20.5",
     "@babel/preset-env": "^7.20.2",
