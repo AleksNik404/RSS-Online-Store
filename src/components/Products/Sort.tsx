@@ -1,52 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { SortDirection } from '../../types';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import styled from '@emotion/styled';
-import { BsGrid3X3GapFill, BsGridFill } from 'react-icons/Bs';
+import { sortItems } from '../../store/Slices/productsSlice';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 const Sort = () => {
-  const { filterProducts } = useAppSelector((state) => state.products);
+  const { query } = useAppSelector((state) => state.products);
+  const dispath = useAppDispatch();
+
+  const [sortPlaceHolder, setSortPlaceHolder] = useState(query.sort || 'Sort options');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const sortHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortPlaceHolder(event.target.value);
+    dispath(sortItems(event.target.value));
+  };
+
+  useEffect(() => {
+    for (const [name, value] of Object.entries(query)) {
+      if (value) searchParams.set(name, value);
+      else searchParams.delete(name);
+    }
+    setSearchParams(searchParams);
+    const a = searchParams.get('sort');
+    if (a) dispath(sortItems(a));
+  }, [dispath, query, query.sort, searchParams, setSearchParams]);
 
   return (
-    <Container>
-      <input type="text" placeholder="Search Product" />
-      <S_Amount>
-        Found items: <span>{filterProducts.length}</span>
-      </S_Amount>
-      <div className="grid-mode">
-        <BsGrid3X3GapFill />
-        <BsGridFill />
-      </div>
-    </Container>
+    <select value={sortPlaceHolder} onChange={sortHandler}>
+      <option value="Sort options" disabled>
+        Sort options
+      </option>
+      <option value={SortDirection.NAME_A_TO_Z}>Sort By: A-Z</option>
+      <option value={SortDirection.NAME_Z_TO_A}>Sort By: Z-A</option>
+      <option value={SortDirection.PRICE_LOWER_TO}>Sort By: Lower Price</option>
+      <option value={SortDirection.PRICE_HIGHER_TO}>Sort By: Higher Price</option>
+    </select>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 15px;
-
-  @media (max-width: 700) {
-    flex-direction: column;
-  }
-
-  .grid-mode {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-
-    height: 30px;
-    font-size: 20px;
-  }
-
-  /* justify-content: space-between; */
-`;
-
-const S_Amount = styled.p`
-  white-space: nowrap;
-`;
 
 export default Sort;

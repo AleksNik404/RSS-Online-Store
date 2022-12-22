@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Sort from '../components/Products/Sort';
+import SortPanel from '../components/Products/SortPanel';
 import Products from '../components/Products/Products';
 import Filters from '../components/Products/Filters';
 
@@ -10,7 +10,7 @@ const ProductsPage = () => {
       <div className="container products">
         <Filters />
         <div className="products__box">
-          <Sort />
+          <SortPanel />
           <Products />
         </div>
       </div>

@@ -3,13 +3,18 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Main from './components/Main';
 import styled from '@emotion/styled';
+import { CartPage, DetailsPage, ErrorPage, ProductsPage, Blat } from './pages';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => {
   return (
     <Container>
-      <Header />
-      <Main />
-      <Footer />
+      <BrowserRouter>
+        <Header />
+        <Main />
+        <Footer />
+      </BrowserRouter>
     </Container>
   );
 };
