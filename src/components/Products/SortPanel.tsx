@@ -3,29 +3,23 @@ import { useAppSelector, useAppDispatch } from '../../hooks';
 import { searchItems } from '../../store/Slices/productsSlice';
 
 import styled from '@emotion/styled';
-import { BsGrid3X3GapFill, BsGridFill } from 'react-icons/Bs';
+import { BsGrid3X3GapFill, BsGridFill } from 'react-icons/bs';
 
 import Sort from './Sort';
+import { updateTextField } from '../../store/Slices/filtersSlice';
 
 const SortPanel = () => {
-  const { filterProducts } = useAppSelector((state) => state.products);
   const dispatch = useAppDispatch();
-
-  const [searchField, setSearchField] = useState('');
+  const { filterProducts } = useAppSelector((state) => state.products);
+  const { textField, reset } = useAppSelector((state) => state.filters);
 
   const searchFieldHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchField(event.target.value);
-    dispatch(searchItems(event.target.value));
+    dispatch(updateTextField({ type: 'textField', value: event.target.value }));
   };
 
   return (
     <Container>
-      <input
-        type="text"
-        value={searchField}
-        onChange={searchFieldHandler}
-        placeholder="Search Product"
-      />
+      <input type="text" value={textField} onChange={searchFieldHandler} placeholder="Search Product" />
 
       <Sort />
       <S_Amount>

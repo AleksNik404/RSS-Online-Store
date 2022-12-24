@@ -1,27 +1,45 @@
-export const products = [
+export type ProductType = {
+  id: number;
+  title: string;
+  description: string;
+  description2: string;
+  price: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: string[];
+  Manufacturer: string;
+  discountPercentage?: number;
+  link?: string;
+};
+
+export const products: ProductType[] = [
   {
     id: 1,
-    title: 'The Mandalorian™ and The Child',
+    title: 'Cold Pursuit',
     description:
-      'It is time to witness the Mandalorian and his little sidekick, the Child’s extraordinary journey in the dangerous galaxy with the launch of the new season of the highly acclaimed Star Wars series The Mandalorian!   ',
+      'In this high-speed cat and mouse game through cold canyon walls, the viewer gets icy chills and flashbacks to X-wing™ acrobatics that Star Wars™ fans know and love, but this time it`s the Razor Crest™ trying to evade capture! Grogu™, The Mandalorian™, and his mysterious passenger do their best to carve through the frozen obstacles as the seasoned X-wing pilots of the Republic give chase, and only time will tell what the outcome will be in this highflying Cold Pursuit!',
     description2:
-      'Sideshow and Hot Toys present the Mandalorian and the Child (Deluxe) Quarter Scale Collectible Set!',
-    price: 683.37,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    stock: 94,
+      'Thomas Kinkade Studios Limited Edition Paper Prints are made with the greatest attention to detail and color accuracy; rest assured that these are the finest, most desirable Thomas Kinkade Studios paper prints available.',
+    price: 196.54,
+    discountPercentage: 97.84,
+    rating: 4.44,
+    stock: 101,
     brand: 'Star Wars',
-    category: 'Statue',
+    category: 'Decor',
     thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/1/main.avif',
+      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/main.jpg',
     images: [
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/1/1.avif',
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/1/2.avif',
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/1/3.avif',
+      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/1.png',
+      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/2.jpg',
+      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/3.jpg',
     ],
-    link: 'https://www.sideshow.com/collectibles/star-wars-the-mandalorian-and-the-child-hot-toys-907267?var=907266',
-    Manufacturer: 'Hot Toys',
+    link: 'https://art.sideshow.com/art-prints/star-wars-cold-pursuit-501857us#',
+    Manufacturer: 'Thomas Kinkade Studios',
   },
+
   {
     id: 2,
     title: 'The Child',
@@ -32,7 +50,7 @@ export const products = [
     price: 899,
     discountPercentage: 17.94,
     rating: 4.44,
-    stock: 34,
+    stock: 2,
     brand: 'Star Wars',
     category: 'Statue',
     thumbnail:
@@ -55,7 +73,7 @@ export const products = [
     price: 257.94,
     discountPercentage: 17.94,
     rating: 4.44,
-    stock: 34,
+    stock: 25,
     brand: 'Star Wars',
     category: 'Statue',
     thumbnail:
@@ -78,7 +96,7 @@ export const products = [
     price: 169.93,
     discountPercentage: 17.94,
     rating: 4.44,
-    stock: 34,
+    stock: 16,
     brand: 'Star Wars',
     category: 'Statue',
     thumbnail:
@@ -101,7 +119,7 @@ export const products = [
     price: 253.05,
     discountPercentage: 17.94,
     rating: 4.44,
-    stock: 34,
+    stock: 19,
     brand: 'Star Wars',
     category: 'Statue',
     thumbnail:
@@ -124,7 +142,7 @@ export const products = [
     price: 341.68,
     discountPercentage: 17.94,
     rating: 4.44,
-    stock: 34,
+    stock: 6,
     brand: 'Star Wars',
     category: 'Statue',
     thumbnail:
@@ -147,7 +165,7 @@ export const products = [
     price: 672.94,
     discountPercentage: 17.94,
     rating: 4.44,
-    stock: 34,
+    stock: 5,
     brand: 'Star Wars',
     category: 'Statue',
     thumbnail:
@@ -170,7 +188,7 @@ export const products = [
     price: 227.94,
     discountPercentage: 17.94,
     rating: 4.44,
-    stock: 34,
+    stock: 13,
     brand: 'Star Wars',
     category: 'Statue',
     thumbnail:
@@ -193,7 +211,7 @@ export const products = [
     price: 325.96,
     discountPercentage: 17.94,
     rating: 4.44,
-    stock: 34,
+    stock: 33,
     brand: 'Star Wars',
     category: 'Statue',
     thumbnail:
@@ -216,7 +234,7 @@ export const products = [
     price: 672.94,
     discountPercentage: 97.84,
     rating: 4.44,
-    stock: 34,
+    stock: 54,
     brand: 'Star Wars',
     category: 'Decor',
     thumbnail:
@@ -231,26 +249,26 @@ export const products = [
   },
   {
     id: 11,
-    title: 'Cold Pursuit',
+    title: 'The Mandalorian™ and The Child',
     description:
-      'In this high-speed cat and mouse game through cold canyon walls, the viewer gets icy chills and flashbacks to X-wing™ acrobatics that Star Wars™ fans know and love, but this time it`s the Razor Crest™ trying to evade capture! Grogu™, The Mandalorian™, and his mysterious passenger do their best to carve through the frozen obstacles as the seasoned X-wing pilots of the Republic give chase, and only time will tell what the outcome will be in this highflying Cold Pursuit!',
+      'It is time to witness the Mandalorian and his little sidekick, the Child’s extraordinary journey in the dangerous galaxy with the launch of the new season of the highly acclaimed Star Wars series The Mandalorian!   ',
     description2:
-      'Thomas Kinkade Studios Limited Edition Paper Prints are made with the greatest attention to detail and color accuracy; rest assured that these are the finest, most desirable Thomas Kinkade Studios paper prints available.',
-    price: 196.54,
-    discountPercentage: 97.84,
-    rating: 4.44,
-    stock: 34,
+      'Sideshow and Hot Toys present the Mandalorian and the Child (Deluxe) Quarter Scale Collectible Set!',
+    price: 683.37,
+    discountPercentage: 12.96,
+    rating: 4.69,
+    stock: 14,
     brand: 'Star Wars',
-    category: 'Decor',
+    category: 'Statue',
     thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/main.jpg',
+      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/1/main.avif',
     images: [
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/1.png',
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/2.jpg',
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/3.jpg',
+      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/1/1.avif',
+      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/1/2.avif',
+      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/1/3.avif',
     ],
-    link: 'https://art.sideshow.com/art-prints/star-wars-cold-pursuit-501857us#',
-    Manufacturer: 'Thomas Kinkade Studios',
+    link: 'https://www.sideshow.com/collectibles/star-wars-the-mandalorian-and-the-child-hot-toys-907267?var=907266',
+    Manufacturer: 'Hot Toys',
   },
   {
     id: 12,
@@ -261,7 +279,7 @@ export const products = [
     price: 51.34,
     discountPercentage: 97.84,
     rating: 4.44,
-    stock: 34,
+    stock: 77,
     brand: 'Cyberpunk 2077',
     category: 'Figure',
     thumbnail:
@@ -283,7 +301,7 @@ export const products = [
     price: 61.12,
     discountPercentage: 97.84,
     rating: 4.44,
-    stock: 34,
+    stock: 23,
     brand: 'Cyberpunk 2077',
     category: 'Figure',
     thumbnail:
@@ -305,7 +323,7 @@ export const products = [
     price: 92.91,
     discountPercentage: 97.84,
     rating: 4.44,
-    stock: 34,
+    stock: 63,
     brand: 'Cyberpunk 2077',
     category: 'Figure',
     thumbnail:
@@ -328,7 +346,7 @@ export const products = [
     price: 1190,
     discountPercentage: 1222.84,
     rating: 4.44,
-    stock: 34,
+    stock: 3,
     brand: 'Warcraft',
     category: 'Premium Statue',
     thumbnail:
@@ -351,7 +369,7 @@ export const products = [
     price: 361.86,
     discountPercentage: 97.84,
     rating: 4.44,
-    stock: 34,
+    stock: 1,
     brand: 'Warcraft',
     category: 'Statue',
     thumbnail:
@@ -374,7 +392,7 @@ export const products = [
     price: 1512.21,
     discountPercentage: 97.84,
     rating: 4.44,
-    stock: 34,
+    stock: 4,
     brand: 'Warcraft',
     category: 'Premium Statue',
     thumbnail:
@@ -397,7 +415,7 @@ export const products = [
     price: 669.58,
     discountPercentage: 97.84,
     rating: 4.44,
-    stock: 34,
+    stock: 3,
     brand: 'Warcraft',
     category: 'Premium Statue',
     thumbnail:
@@ -420,7 +438,7 @@ export const products = [
     price: 1465.21,
     discountPercentage: 97.84,
     rating: 4.44,
-    stock: 34,
+    stock: 3,
     brand: 'Warcraft',
     category: 'Premium Statue',
     thumbnail:
@@ -443,7 +461,7 @@ export const products = [
     price: 105.61,
     discountPercentage: 97.84,
     rating: 4.44,
-    stock: 34,
+    stock: 85,
     brand: 'Lord of the Rings',
     category: 'Decor',
     thumbnail:

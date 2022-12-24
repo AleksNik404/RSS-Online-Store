@@ -23,8 +23,8 @@ const Container = styled.div`
 
   & > .products {
     display: grid;
-    grid-template-columns: minmax(160px, 300px) 1fr;
-    gap: 30px;
+    grid-template-columns: minmax(160px, 270px) 1fr;
+    gap: 40px;
   }
 `;
 

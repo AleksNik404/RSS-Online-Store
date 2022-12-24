@@ -16,7 +16,7 @@ const DetailsPage = () => {
     return <ErrorPage />;
   }
 
-  return <div>DA PIZDES</div>;
+  return <div>DetailsPage</div>;
 };
 
 export default DetailsPage;
