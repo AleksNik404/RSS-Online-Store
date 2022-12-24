@@ -4,7 +4,7 @@
 /* font-family: 'Rubik', sans-serif; */
 
 .container {
-  max-width: 1160px;
+  max-width: 1280px;
   margin: 0 auto;
 }
 
@@ -20,4 +20,8 @@ body {
 * {
   margin: 0;
   box-sizing: border-box;
+}
+
+.not-active {
+  color: #aaa;
 }
