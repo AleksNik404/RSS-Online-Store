@@ -3,6 +3,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  position: relative;
   /* justify-content: center; */
 }
 
@@ -13,4 +15,6 @@
 .amount {
   display: flex;
   justify-content: space-between;
+
+  margin-top: 25px;
 }

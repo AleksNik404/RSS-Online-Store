@@ -17,6 +17,7 @@ const Checkbox: React.FC<ICheckBox> = ({ type, filterCount, allCount, brand }) =
 
   const dispatch = useAppDispatch();
 
+  // При клике, добавить в массив фильтров название поля.
   const checkboxHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked: isChecked } = event.target;
     if (type === 'brands') dispatch(updateBrands({ value, isChecked }));

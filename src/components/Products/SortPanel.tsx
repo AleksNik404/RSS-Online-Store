@@ -6,13 +6,15 @@ import styled from '@emotion/styled';
 import { BsGrid3X3GapFill, BsGridFill } from 'react-icons/bs';
 
 import Sort from './Sort';
-import { updateTextField } from '../../store/Slices/filtersSlice';
+import { setBigGrid, setSmallGrid, updateTextField } from '../../store/Slices/filtersSlice';
 
 const SortPanel = () => {
   const dispatch = useAppDispatch();
   const { filterProducts } = useAppSelector((state) => state.products);
-  const { textField, reset } = useAppSelector((state) => state.filters);
+  const { textField } = useAppSelector((state) => state.filters);
+  const { isBigGrid } = useAppSelector((state) => state.filters);
 
+  // При вводе текса обновлять стор
   const searchFieldHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateTextField({ type: 'textField', value: event.target.value }));
   };
@@ -26,8 +28,8 @@ const SortPanel = () => {
         Found items: <span>{filterProducts.length}</span>
       </S_Amount>
       <div className="grid-mode">
-        <BsGrid3X3GapFill />
-        <BsGridFill />
+        <BsGrid3X3GapFill className="grid-icon" onClick={() => dispatch(setBigGrid())} />
+        <BsGridFill className="grid-icon" onClick={() => dispatch(setSmallGrid())} />
       </div>
     </Container>
   );
@@ -53,6 +55,10 @@ const Container = styled.div`
 
     height: 30px;
     font-size: 20px;
+  }
+
+  .grid-icon {
+    cursor: pointer;
   }
 `;
 

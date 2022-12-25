@@ -28,14 +28,14 @@ const initialState = {
   minMaxFiltPrice: { min: 0, max: 1 },
   minMaxFiltStock: { min: 0, max: 1 },
 
-  sort: 'Sort options',
   query: {
-    sort: urlParams.get('sort') || '',
+    sort: urlParams.get('sort') || 'Sort options',
     minMaxPrice: urlParams.get('minMaxPrice') || '',
     minMaxStock: urlParams.get('minMaxStock') || '',
     textField: urlParams.get('textField') || '',
     brands: urlParams.get('brands') || '',
     categories: urlParams.get('categories') || '',
+    isBigGrid: Boolean(urlParams.get('isBigGrid')) || '',
   },
 };
 
@@ -50,13 +50,9 @@ const productsSlice = createSlice({
         state.filterProducts.sort((a, b) => a.title.localeCompare(b.title));
       if (action.payload === SortDirection.NAME_Z_TO_A)
         state.filterProducts.sort((a, b) => b.title.localeCompare(a.title));
-
-      // state.query.sort = action.payload;
     },
 
     searchItems(state, action) {
-      // state.query.searchField = action.payload;
-
       state.filterProducts = state.products.filter((item) => {
         let isMatch = false;
 
@@ -72,7 +68,7 @@ const productsSlice = createSlice({
       });
     },
 
-    // FIXME: 2 функции делают одно и тоже с разными стейтами
+    // FIXME: 2 функции делают одно и тоже с разными стейтами / Infinity ужасно наверно
     updateMinMaxPrice(state) {
       state.minMaxPrice = state.products.reduce(
         (minMax, product) => {
@@ -122,13 +118,13 @@ const productsSlice = createSlice({
         });
       }
 
-      // FIXME: Сделать проверку что цена изменилась с прошлого раза
+      // FIXME: Сделать проверку что цена изменилась с прошлого раза / Infinity ужасно наверно
       if (minPrice !== -Infinity || maxPrice !== Infinity) {
         // console.log(minPrice, maxPrice);
         newFilteredProducts = newFilteredProducts.filter((item) => item.price >= minPrice && item.price <= maxPrice);
       }
 
-      //FIXME: Сделать проверку что количество изменилась с прошлого раза
+      //FIXME: Сделать проверку что количество изменилась с прошлого раза / Infinity ужасно наверно
       if (minStock !== -Infinity || maxStock !== Infinity) {
         // console.log(minStock, maxStock);
         newFilteredProducts = newFilteredProducts.filter((item) => item.stock >= minStock && item.stock <= maxStock);
@@ -145,34 +141,12 @@ const productsSlice = createSlice({
     },
 
     updateSortType(state, { payload }: PayloadAction<UPDATE_SORT_TYPE>) {
-      state.sort = payload;
+      state.query.sort = payload;
     },
 
     resetSort(state) {
-      state.sort = 'Sort options';
+      state.query.sort = 'Sort options';
     },
-
-    // updateParams(state, { payload: filters }) {
-    //   const {
-    //     textField,
-    //     minMaxPrice: [minPrice, maxPrice],
-    //     minMaxStock: [minStock, maxStock],
-    //     brands,
-    //     categories,
-    //     sort,
-    //   } = filters;
-
-    //   console.log(textField, minPrice, maxPrice, minStock, maxStock, brands, categories);
-    //   urlParams.set('textField', textField);
-    //   urlParams.set('minMaxPrice', `${minPrice},${maxPrice}`);
-    //   urlParams.set('minMaxStock', `${minStock},${maxStock}`);
-    //   urlParams.set('textField', brands.toString());
-    //   urlParams.set('textField', categories.toString());
-    //   urlParams.set('sort', sort);
-    // },
-
-    //
-    //
   },
 });
 
@@ -182,11 +156,8 @@ export const {
   updateMinMaxPrice,
   updateMinMaxStock,
   updateFilterProducts,
-  // updateMinMaxFiltPrice,
-  // updateMinMaxFiltStock,
   updateSortType,
   resetSort,
-  // updateParams,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

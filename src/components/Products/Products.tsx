@@ -10,28 +10,35 @@ import {
   updateMinMaxStock,
   updateFilterProducts,
   sortItems,
-  // updateParams,
-  // updateMinMaxFiltPrice,
-  // updateMinMaxFiltStock,
 } from '../../store/Slices/productsSlice';
 import { updateFiltersByquery } from '../../store/Slices/filtersSlice';
+import AddCart from './AddCart';
+import BigGridList from './BigGridList';
 
 const Products = () => {
-  const { products, filterProducts, query, sort } = useAppSelector((state) => state.products);
+  const { products, filterProducts, query } = useAppSelector((state) => state.products);
+  const { sort } = useAppSelector((state) => state.products.query);
+
   const filters = useAppSelector((state) => state.filters);
 
   const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  // FIXME: Столько useEffect зависимостей, не нормально
+  // Найти минимальную и максимальную цену на старте для продуктов для слайдера.
   useEffect(() => {
     dispatch(updateMinMaxPrice());
     dispatch(updateMinMaxStock());
   }, [dispatch, products]);
 
+  // Чтоб при старте проверялись url параметры и они обновили фильтры, чтоб они прмиенились.
   useEffect(() => {
     dispatch(updateFiltersByquery(query));
   }, [dispatch, query]);
 
+  // Этот ужас чтоб на основе фильтров выставлять актуальный url параметры
   useEffect(() => {
     const {
       textField,
@@ -39,7 +46,7 @@ const Products = () => {
       minMaxStock: [minStock, maxStock],
       brands,
       categories,
-      sort,
+      isBigGrid,
     } = filters;
 
     if (textField) searchParams.set('textField', textField);
@@ -60,19 +67,23 @@ const Products = () => {
     if (sort !== 'Sort options') searchParams.set('sort', sort);
     else searchParams.delete('sort');
 
+    if (isBigGrid) searchParams.set('isBigGrid', 'true');
+    else searchParams.delete('isBigGrid');
+
     searchParams.sort();
 
-    console.log(sort);
-
     setSearchParams(searchParams);
-  }, [dispatch, filters, searchParams, setSearchParams]);
+  }, [dispatch, filters, searchParams, setSearchParams, sort]);
 
+  // При изминение фильтров пересчитывались товары
   useEffect(() => {
     dispatch(updateFilterProducts(filters));
     dispatch(sortItems(sort));
   }, [dispatch, filters, sort]);
 
   if (!filterProducts.length) return <div>No products found</div>;
+
+  if (filters.isBigGrid) return <BigGridList />;
 
   return (
     <div className={style.items}>
@@ -85,7 +96,8 @@ const Products = () => {
             <p className={style.name}>{item.title}</p>
             <div className={style.priceBox}>
               <p>{item.price.toFixed(2)} $</p>
-              <BsBagPlus />
+
+              <AddCart />
             </div>
           </div>
         </div>
