@@ -17,7 +17,7 @@ import BigGridList from './BigGridList';
 
 const Products = () => {
   const { products, filterProducts, query } = useAppSelector((state) => state.products);
-  const { sort } = useAppSelector((state) => state.products.query);
+  const { sort } = useAppSelector((state) => state.filters);
 
   const filters = useAppSelector((state) => state.filters);
 
@@ -47,6 +47,7 @@ const Products = () => {
       brands,
       categories,
       isBigGrid,
+      sort,
     } = filters;
 
     if (textField) searchParams.set('textField', textField);

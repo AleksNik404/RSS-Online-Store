@@ -140,13 +140,13 @@ const productsSlice = createSlice({
       state.filterProducts = newFilteredProducts;
     },
 
-    updateSortType(state, { payload }: PayloadAction<UPDATE_SORT_TYPE>) {
-      state.query.sort = payload;
-    },
+    // updateSortType(state, { payload }: PayloadAction<UPDATE_SORT_TYPE>) {
+    //   state.query.sort = payload;
+    // },
 
-    resetSort(state) {
-      state.query.sort = 'Sort options';
-    },
+    // resetSort(state) {
+    //   state.query.sort = 'Sort options';
+    // },
   },
 });
 
@@ -156,8 +156,8 @@ export const {
   updateMinMaxPrice,
   updateMinMaxStock,
   updateFilterProducts,
-  updateSortType,
-  resetSort,
+  // updateSortType,
+  // resetSort,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

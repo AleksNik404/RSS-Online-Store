@@ -6,7 +6,7 @@ import StockRange from './RangeSliders/StockRange';
 import { ProductType } from '../../store/data/data2';
 import { updateBrands, updateCategories, resetFilters } from '../../store/Slices/filtersSlice';
 import Checkbox from './Checkbox';
-import { resetSort } from '../../store/Slices/productsSlice';
+// import { resetSort } from '../../store/Slices/productsSlice';
 import PriceRange2 from './RangeSliders/PriceRange2';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -31,7 +31,7 @@ const Filters = () => {
 
   // Кнопка сброса фильтров, убрать фильтры в одном сторе, и фернуть дефелтное значение сортировки
   const resetOptions = () => {
-    dispatch(resetSort());
+    // dispatch(resetSort());
     dispatch(resetFilters());
     //TODO: выбрать вариант по лучше, фикса бага, что иногда url не удаляется при сбросе
     history.pushState({}, '', location.href.split('?')[0]);

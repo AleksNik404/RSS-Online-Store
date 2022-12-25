@@ -2,17 +2,19 @@ import React from 'react';
 import { SortDirection } from '../../types';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { sortItems } from '../../store/Slices/productsSlice';
-import { updateSortType } from '../../store/Slices/productsSlice';
+import { setSortFilter } from '../../store/Slices/filtersSlice';
+// import { updateSortType } from '../../store/Slices/productsSlice';
 
 const Sort = () => {
   const dispath = useAppDispatch();
-  const { sort } = useAppSelector((state) => state.products.query);
+  const { sort } = useAppSelector((state) => state.filters);
 
   // При смене селекта, отсортировать продукты и обновить название сортировки
   const sortHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    dispath(updateSortType(event.target.value));
+    dispath(setSortFilter(event.target.value));
+    dispath(sortItems(event.target.value));
+    // dispath(updateSortType(event.target.value));
     //TODO: Понять почему работает без нижней функции, и почему есть баг при сортировке.
-    // dispath(sortItems(event.target.value));
   };
 
   return (

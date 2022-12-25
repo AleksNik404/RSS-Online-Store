@@ -8,6 +8,7 @@ const PriceRange = () => {
   const { minMaxPrice } = useAppSelector((state) => state.products);
   const { reset } = useAppSelector((state) => state.filters);
 
+  //TODO: работать с редаксом
   const [firstThumb, setFirstThumb] = useState(minMaxPrice.min);
   const [secondThumb, setSecondThumb] = useState(minMaxPrice.max);
 
@@ -18,6 +19,16 @@ const PriceRange = () => {
     setFirstThumb(minMaxPrice.min);
     setSecondThumb(minMaxPrice.max);
   }, [minMaxPrice, reset]);
+
+  const setMinHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFirstThumb(Number(e.target.value));
+    dispatch(updateMinMaxPrice({ min: Number(e.target.value), max: secondThumb }));
+  };
+
+  const setMaxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSecondThumb(Number(e.target.value));
+    dispatch(updateMinMaxPrice({ min: firstThumb, max: Number(e.target.value) }));
+  };
 
   // 1) FIXME: Отображается правильно, но в фильтры идёт предпоследнее значение ползунка, из-за этого Баг фильтрации.
   // 2) FIXME: Оптимизировать обновление, чтоб не 1000 раз менялся фильтр. А например при отпускание интупа. В Реакте onChange работает по другому. Но как?_
@@ -33,10 +44,7 @@ const PriceRange = () => {
         max={Math.ceil(minMaxPrice.max)}
         value={firstThumb}
         // onClick={() => dispatch(updateMinMaxPrice({ min: firstThumb, max: secondThumb }))}
-        onChange={(e) => {
-          dispatch(updateMinMaxPrice({ min: firstThumb, max: secondThumb }));
-          setFirstThumb(Number(e.target.value));
-        }}
+        onChange={setMinHandler}
       />
       <input
         className={style.slider}
@@ -46,11 +54,7 @@ const PriceRange = () => {
         max={Math.ceil(minMaxPrice.max)}
         value={secondThumb}
         // onClick={() => dispatch(updateMinMaxPrice({ min: firstThumb, max: secondThumb }))}
-        onChange={(e) => {
-          dispatch(updateMinMaxPrice({ min: firstThumb, max: secondThumb }));
-          setSecondThumb(Number(e.target.value));
-          console.log(firstThumb, secondThumb);
-        }}
+        onChange={setMaxHandler}
       />
       <div className={style.amount}>
         <span>min: {Math.trunc(Math.min(firstThumb, secondThumb))} $</span>
