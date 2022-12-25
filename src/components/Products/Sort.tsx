@@ -2,27 +2,18 @@ import React from 'react';
 import { SortDirection } from '../../types';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { sortItems } from '../../store/Slices/productsSlice';
-// import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { updateSortType } from '../../store/Slices/productsSlice';
 
 const Sort = () => {
   const dispath = useAppDispatch();
-  const { sort } = useAppSelector((state) => state.products);
+  const { sort } = useAppSelector((state) => state.products.query);
 
+  // При смене селекта, отсортировать продукты и обновить название сортировки
   const sortHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    dispath(sortItems(event.target.value));
     dispath(updateSortType(event.target.value));
+    //TODO: Понять почему работает без нижней функции, и почему есть баг при сортировке.
+    // dispath(sortItems(event.target.value));
   };
-
-  // useEffect(() => {
-  //   for (const [name, value] of Object.entries(query)) {
-  //     if (value) searchParams.set(name, value);
-  //     else searchParams.delete(name);
-  //   }
-  //   setSearchParams(searchParams);
-  //   const a = searchParams.get('sort');
-  //   if (a) dispath(sortItems(a));
-  // }, [dispath, query, query.sort, searchParams, setSearchParams]);
 
   return (
     <select onChange={sortHandler} value={sort}>

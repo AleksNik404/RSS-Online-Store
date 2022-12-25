@@ -5,14 +5,10 @@ export type BRAND_OR_CATEGORY = 'brands' | 'categories';
 type UPDATE_TEXTFIELD_TYPE = { type: 'textField'; value: string };
 type UPDATE_BRANDS_TYPE = { value: string; isChecked: boolean };
 type UPDATE_CATEGORY_TYPE = { value: string; isChecked: boolean };
+type UPDATE_GRIDMODE_TYPE = boolean;
 
 interface IFilterState {
   textField: string;
-
-  minPrice?: number;
-  maxPrice?: number;
-  minStock?: number;
-  maxStock?: number;
 
   minMaxStock: number[];
   minMaxPrice: number[];
@@ -21,6 +17,7 @@ interface IFilterState {
   count: number;
   reset: boolean;
   sort: string;
+  isBigGrid: boolean;
 }
 
 const initialState: IFilterState = {
@@ -32,12 +29,14 @@ const initialState: IFilterState = {
   count: 0,
   reset: false,
   sort: 'Sort options',
+  isBigGrid: false,
 };
 
 const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
+    //TODO: 2 похожих функции в 1 / TS не дает все сделать одним. Знаний нет.
     updateMinMaxPrice(state, { payload: { min, max } }: PayloadAction<{ min: number; max: number }>) {
       state.minMaxPrice = [Math.min(min, max), Math.max(min, max)];
     },
@@ -66,9 +65,9 @@ const filtersSlice = createSlice({
       state.minMaxPrice = [-Infinity, Infinity];
       state.brands = [];
       state.categories = [];
-      state.count = 0;
+      //FIXME: моя глупая реализация оповещения обновления)
       state.reset = !state.reset;
-      // state.sort = 'Sort options';
+      state.isBigGrid = false;
     },
 
     updateFiltersByquery(state, { payload }) {
@@ -78,6 +77,15 @@ const filtersSlice = createSlice({
       if (payload.minMaxStock) state.minMaxStock = payload.minMaxStock.split('↕');
       if (payload.textField) state.textField = payload.textField;
       if (payload.sort) state.sort = payload.sort;
+      if (payload.isBigGrid) state.isBigGrid = payload.isBigGrid;
+    },
+
+    setBigGrid(state) {
+      state.isBigGrid = true;
+    },
+
+    setSmallGrid(state) {
+      state.isBigGrid = false;
     },
   },
 });
@@ -90,6 +98,8 @@ export const {
   updateCategories,
   resetFilters,
   updateFiltersByquery,
+  setBigGrid,
+  setSmallGrid,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

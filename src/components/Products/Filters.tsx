@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import PriceRange from './RangeSliders/PriceRange';
@@ -7,10 +7,13 @@ import { ProductType } from '../../store/data/data2';
 import { updateBrands, updateCategories, resetFilters } from '../../store/Slices/filtersSlice';
 import Checkbox from './Checkbox';
 import { resetSort } from '../../store/Slices/productsSlice';
+import PriceRange2 from './RangeSliders/PriceRange2';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 const Filters = () => {
   const { products } = useAppSelector((state) => state.products);
   const { filterProducts } = useAppSelector((state) => state.products);
+  const [copyButton, setCopyButton] = useState(false);
 
   const dispatch = useAppDispatch();
 
@@ -26,13 +29,22 @@ const Filters = () => {
     return arr.filter((item) => item.category === name).length;
   };
 
+  // Кнопка сброса фильтров, убрать фильтры в одном сторе, и фернуть дефелтное значение сортировки
   const resetOptions = () => {
-    dispatch(resetFilters());
     dispatch(resetSort());
+    dispatch(resetFilters());
+    //TODO: выбрать вариант по лучше, фикса бага, что иногда url не удаляется при сбросе
+    history.pushState({}, '', location.href.split('?')[0]);
   };
 
+  // Скопировать в буффер линк
   const copyLink = () => {
     navigator.clipboard.writeText(window.location.href);
+    setCopyButton(true);
+
+    setTimeout(() => {
+      setCopyButton(false);
+    }, 1000);
   };
 
   return (
@@ -68,7 +80,7 @@ const Filters = () => {
         <PriceRange />
       </S_Price>
       <button onClick={resetOptions}>Clear Filters</button>
-      <button onClick={copyLink}>Copy Link</button>
+      <button onClick={copyLink}>{copyButton ? 'Copied !' : 'Copy Link'}</button>
     </S_Filters>
   );
 };
