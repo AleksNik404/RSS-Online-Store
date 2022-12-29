@@ -5,7 +5,7 @@ import { ProductType } from '../../store/data/data2';
 import { addToCart, calculateTotals } from '../../store/Slices/cartSlice';
 import { useAppDispatch, useAppSelector } from './../../hooks';
 
-const AddCart: React.FC<ProductType> = (item) => {
+const AddCartAndBuy: React.FC<ProductType> = (item) => {
   const { id, price, thumbnail, stock, category, title } = item;
 
   const { cart } = useAppSelector((state) => state.cart);
@@ -32,10 +32,10 @@ const AddCart: React.FC<ProductType> = (item) => {
 
   return (
     <button onClick={addCartHandler}>
-      {inCart ? 'Убрать из корзины' : 'Добавить в корзину'}
+      {inCart ? 'Убрать из корзины' : 'Buy Now'}
       {/* <BsBagPlus /> */}
     </button>
   );
 };
 
-export default AddCart;
+export default AddCartAndBuy;

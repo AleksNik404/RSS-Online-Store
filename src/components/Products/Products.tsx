@@ -17,8 +17,8 @@ import BigGridList from './BigGridList';
 
 const Products = () => {
   const { products, filterProducts, query } = useAppSelector((state) => state.products);
+  const { cart } = useAppSelector((state) => state.cart);
   const { sort } = useAppSelector((state) => state.filters);
-
   const filters = useAppSelector((state) => state.filters);
 
   const dispatch = useAppDispatch();
@@ -83,26 +83,26 @@ const Products = () => {
   }, [dispatch, filters, sort]);
 
   if (!filterProducts.length) return <div>No products found</div>;
-
   if (filters.isBigGrid) return <BigGridList />;
-
   return (
     <div className={style.items}>
-      {filterProducts.map((item) => (
-        <div key={item.id} className={style.item}>
-          <Link to={`/details/${item.id}`} className={style.imgBox}>
-            <img className={style.img} src={item.thumbnail} alt={item.title} />
-          </Link>
-          <div className={style.details}>
-            <p className={style.name}>{item.title}</p>
-            <div className={style.priceBox}>
-              <p>{item.price.toFixed(2)} $</p>
+      {filterProducts.map((item) => {
+        return (
+          <div key={item.id} className={style.item}>
+            <Link to={`/details/${item.id}`} className={style.imgBox}>
+              <img className={style.img} src={item.thumbnail} alt={item.title} />
+            </Link>
+            <div className={style.details}>
+              <p className={style.name}>{item.title}</p>
+              <div className={style.priceBox}>
+                <p>{item.price.toFixed(2)} $</p>
 
-              <AddCart />
+                <AddCart {...item} />
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
