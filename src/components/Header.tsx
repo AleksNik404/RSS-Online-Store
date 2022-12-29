@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import { MdShoppingCart } from 'react-icons/md';
 
 const Header = () => {
-  const total_amount = useAppSelector((state) => state.cart.total_amount);
+  const { total_amount, total_price } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
   return (
@@ -17,8 +17,8 @@ const Header = () => {
         </Link>
         <Link to="/cart">
           <div className="cart">
-            <p className="cart-total">${total_amount} -</p>
-            Cart <MdShoppingCart />
+            <p className="cart-total">{total_price}$ -</p>
+            Cart <MdShoppingCart /> - amount: {total_amount}
           </div>
         </Link>
       </div>
@@ -44,7 +44,7 @@ const Container = styled.div`
   }
 
   .cart-total {
-    width: 70px;
+    min-width: 70px;
     text-align: right;
   }
 `;

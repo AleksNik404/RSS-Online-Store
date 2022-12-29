@@ -68,6 +68,7 @@ const filtersSlice = createSlice({
       //FIXME: моя глупая реализация оповещения обновления)
       state.reset = !state.reset;
       state.isBigGrid = false;
+      state.sort = 'Sort options';
     },
 
     updateFiltersByquery(state, { payload }) {
@@ -87,6 +88,10 @@ const filtersSlice = createSlice({
     setSmallGrid(state) {
       state.isBigGrid = false;
     },
+
+    setSortFilter(state, { payload }) {
+      state.sort = payload;
+    },
   },
 });
 
@@ -100,6 +105,7 @@ export const {
   updateFiltersByquery,
   setBigGrid,
   setSmallGrid,
+  setSortFilter,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

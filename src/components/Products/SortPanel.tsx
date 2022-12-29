@@ -22,14 +22,13 @@ const SortPanel = () => {
   return (
     <Container>
       <input type="text" value={textField} onChange={searchFieldHandler} placeholder="Search Product" />
-
       <Sort />
       <S_Amount>
         Found items: <span>{filterProducts.length}</span>
       </S_Amount>
       <div className="grid-mode">
-        <BsGrid3X3GapFill className="grid-icon" onClick={() => dispatch(setBigGrid())} />
-        <BsGridFill className="grid-icon" onClick={() => dispatch(setSmallGrid())} />
+        <BsGrid3X3GapFill className="grid-icon" onClick={() => dispatch(setSmallGrid())} />
+        <BsGridFill className="grid-icon" onClick={() => dispatch(setBigGrid())} />
       </div>
     </Container>
   );

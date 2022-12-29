@@ -25,10 +25,15 @@ const StockRange = () => {
     setSecondThumb(minMaxStock.max);
   }, [minMaxStock, reset]);
 
-  // //FIXME: Оптимизировать обновление, чтоб не 1000 раз менялся фильтр. А например при отпускание интупа. В Реакте onChange работает по другому. Тут костыль нужен.
-  // useEffect(() => {
-  //   dispatch(updateMinMaxStock({ min: firstThumb, max: secondThumb }));
-  // }, [firstThumb, secondThumb]);
+  const setMinHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFirstThumb(Number(e.target.value));
+    dispatch(updateMinMaxStock({ min: Number(e.target.value), max: secondThumb }));
+  };
+
+  const setMaxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSecondThumb(Number(e.target.value));
+    dispatch(updateMinMaxStock({ min: firstThumb, max: Number(e.target.value) }));
+  };
 
   return (
     <div className={style.sliderBox}>
@@ -39,10 +44,7 @@ const StockRange = () => {
         max={minMaxStock.max}
         value={firstThumb}
         // onClick={() => dispatch(updateMinMaxStock({ min: firstThumb, max: secondThumb }))}
-        onChange={(e) => {
-          dispatch(updateMinMaxStock({ min: firstThumb, max: secondThumb }));
-          setFirstThumb(Number(e.target.value));
-        }}
+        onChange={setMinHandler}
       />
       <input
         className={style.slider}
@@ -51,10 +53,7 @@ const StockRange = () => {
         max={minMaxStock.max}
         value={secondThumb}
         // onClick={() => dispatch(updateMinMaxStock({ min: firstThumb, max: secondThumb }))}
-        onChange={(e) => {
-          dispatch(updateMinMaxStock({ min: firstThumb, max: secondThumb }));
-          setSecondThumb(Number(e.target.value));
-        }}
+        onChange={setMaxHandler}
       />
 
       <div className={style.amount}>
