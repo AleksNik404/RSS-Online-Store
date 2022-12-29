@@ -14,6 +14,7 @@ import {
 import { updateFiltersByquery } from '../../store/Slices/filtersSlice';
 import AddCart from './AddCart';
 import BigGridList from './BigGridList';
+import { calculateTotals } from '../../store/Slices/cartSlice';
 
 const Products = () => {
   const { products, filterProducts, query } = useAppSelector((state) => state.products);
@@ -97,7 +98,7 @@ const Products = () => {
               <div className={style.priceBox}>
                 <p>{item.price.toFixed(2)} $</p>
 
-                <AddCart {...item} />
+                <AddCart amount={1} {...item} />
               </div>
             </div>
           </div>

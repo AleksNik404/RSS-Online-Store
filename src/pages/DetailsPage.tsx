@@ -47,7 +47,7 @@ const DetailsPage = () => {
           <p>{product.stock}</p>
           <p>{product.brand}</p>
           <p>{product.price}</p>
-          <AddCart {...product} />
+          <AddCart amount={1} {...product} />
           <AddCartAndBuy {...product} />
         </DetailsBox>
       </Container>
