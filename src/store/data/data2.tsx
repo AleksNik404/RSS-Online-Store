@@ -29,8 +29,7 @@ export const products: ProductType[] = [
     stock: 101,
     brand: 'Star Wars',
     category: 'Decor',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/main.jpg',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/main.jpg',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/1.png',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/2.jpg',
@@ -53,8 +52,7 @@ export const products: ProductType[] = [
     stock: 2,
     brand: 'Star Wars',
     category: 'Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/2/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/2/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/2/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/2/2.avif',
@@ -76,8 +74,7 @@ export const products: ProductType[] = [
     stock: 25,
     brand: 'Star Wars',
     category: 'Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/3/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/3/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/3/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/3/2.avif',
@@ -99,8 +96,7 @@ export const products: ProductType[] = [
     stock: 16,
     brand: 'Star Wars',
     category: 'Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/4/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/4/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/4/1.webp',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/4/2.webp',
@@ -122,8 +118,7 @@ export const products: ProductType[] = [
     stock: 19,
     brand: 'Star Wars',
     category: 'Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/5/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/5/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/5/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/5/2.avif',
@@ -145,8 +140,7 @@ export const products: ProductType[] = [
     stock: 6,
     brand: 'Star Wars',
     category: 'Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/6/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/6/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/6/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/6/2.avif',
@@ -168,8 +162,7 @@ export const products: ProductType[] = [
     stock: 5,
     brand: 'Star Wars',
     category: 'Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/7/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/7/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/7/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/7/2.webp',
@@ -191,8 +184,7 @@ export const products: ProductType[] = [
     stock: 13,
     brand: 'Star Wars',
     category: 'Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/8/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/8/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/8/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/8/2.avif',
@@ -214,8 +206,7 @@ export const products: ProductType[] = [
     stock: 33,
     brand: 'Star Wars',
     category: 'Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/9/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/9/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/9/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/9/2.avif',
@@ -237,8 +228,7 @@ export const products: ProductType[] = [
     stock: 54,
     brand: 'Star Wars',
     category: 'Decor',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/10/1.png',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/10/1.png',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/10/main.jpg',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/10/2.jpg',
@@ -252,16 +242,14 @@ export const products: ProductType[] = [
     title: 'The Mandalorian™ and The Child',
     description:
       'It is time to witness the Mandalorian and his little sidekick, the Child’s extraordinary journey in the dangerous galaxy with the launch of the new season of the highly acclaimed Star Wars series The Mandalorian!   ',
-    description2:
-      'Sideshow and Hot Toys present the Mandalorian and the Child (Deluxe) Quarter Scale Collectible Set!',
+    description2: 'Sideshow and Hot Toys present the Mandalorian and the Child (Deluxe) Quarter Scale Collectible Set!',
     price: 683.37,
     discountPercentage: 12.96,
     rating: 4.69,
     stock: 14,
     brand: 'Star Wars',
     category: 'Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/1/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/1/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/1/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/1/2.avif',
@@ -282,8 +270,7 @@ export const products: ProductType[] = [
     stock: 77,
     brand: 'Cyberpunk 2077',
     category: 'Figure',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/12/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/12/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/12/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/12/2.avif',
@@ -304,8 +291,7 @@ export const products: ProductType[] = [
     stock: 23,
     brand: 'Cyberpunk 2077',
     category: 'Figure',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/13/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/13/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/13/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/13/2.avif',
@@ -326,8 +312,7 @@ export const products: ProductType[] = [
     stock: 63,
     brand: 'Cyberpunk 2077',
     category: 'Figure',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/14/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/14/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/14/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/14/2.webp',
@@ -349,8 +334,7 @@ export const products: ProductType[] = [
     stock: 3,
     brand: 'Warcraft',
     category: 'Premium Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/15/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/15/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/15/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/15/2.avif',
@@ -372,8 +356,7 @@ export const products: ProductType[] = [
     stock: 1,
     brand: 'Warcraft',
     category: 'Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/16/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/16/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/16/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/16/2.avif',
@@ -395,8 +378,7 @@ export const products: ProductType[] = [
     stock: 4,
     brand: 'Warcraft',
     category: 'Premium Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/17/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/17/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/17/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/17/2.avif',
@@ -418,8 +400,7 @@ export const products: ProductType[] = [
     stock: 3,
     brand: 'Warcraft',
     category: 'Premium Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/18/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/18/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/18/1.webp',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/18/2.webp',
@@ -441,8 +422,7 @@ export const products: ProductType[] = [
     stock: 3,
     brand: 'Warcraft',
     category: 'Premium Statue',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/19/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/19/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/19/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/19/2.avif',
@@ -464,8 +444,7 @@ export const products: ProductType[] = [
     stock: 85,
     brand: 'Lord of the Rings',
     category: 'Decor',
-    thumbnail:
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/20/main.avif',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/20/main.avif',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/20/1.jpg',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/20/2.png',

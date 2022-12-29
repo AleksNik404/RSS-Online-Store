@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import styled from '@emotion/styled';
 
 import { MdShoppingCart } from 'react-icons/md';
+import { calculateTotals } from '../store/Slices/cartSlice';
 
 const Header = () => {
-  const { total_amount, total_price } = useAppSelector((state) => state.cart);
+  const { total_amount, total_price, cart } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const cartData = JSON.stringify(cart);
+    localStorage.setItem('Griz-cart', cartData);
+
+    dispatch(calculateTotals());
+  }, [cart, dispatch]);
 
   return (
     <Container className="">

@@ -2,25 +2,33 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { ProductType } from '../data/data2';
 
-type ProductInCart = {
+export type ProductInCart = {
   id: number;
+  title: string;
   price: number;
   thumbnail: string;
   category: string;
   stock: number;
   amount: number;
+  description2: string;
 };
 
-type ProductTypeInCart = ProductType & ProductInCart;
+export type ProductTypeInCart = ProductType & ProductInCart;
 
 interface ICartState {
-  cart: ProductInCart[];
+  cart: ProductTypeInCart[];
   total_amount: number;
   total_price: number;
 }
 
+const getCartStorage = () => {
+  const cartData = localStorage.getItem('Griz-cart');
+
+  if (cartData) return JSON.parse(cartData);
+};
+
 const initialState: ICartState = {
-  cart: [],
+  cart: getCartStorage() || [],
   total_amount: 0,
   total_price: 0,
 };
@@ -31,8 +39,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, { payload: newProduct }) {
       const sameProduct = state.cart.find((product) => product.id === newProduct.id);
-      // if (sameProduct) sameProduct.amount += 1;
-      // else state.cart.push(newProduct);
+
       if (!sameProduct) state.cart.push(newProduct);
       else state.cart = state.cart.filter((item) => item.id !== newProduct.id);
     },
@@ -51,9 +58,24 @@ const cartSlice = createSlice({
       state.total_amount = Number(totals.total_amount.toFixed(2));
       state.total_price = Number(totals.total_price.toFixed(2));
     },
+
+    increaseItemAmount(state, { payload: id }) {
+      const productIndex = state.cart.findIndex((product) => product.id === id);
+      const { amount, stock } = state.cart[productIndex];
+
+      if (amount < stock) state.cart[productIndex].amount += 1;
+    },
+
+    decreaseItemAmount(state, { payload: id }) {
+      const productIndex = state.cart.findIndex((product) => product.id === id);
+      const { amount } = state.cart[productIndex];
+
+      if (amount > 1) state.cart[productIndex].amount -= 1;
+      else state.cart = state.cart.filter((product) => product.id !== id);
+    },
   },
 });
 
-export const { addToCart, calculateTotals } = cartSlice.actions;
+export const { addToCart, calculateTotals, increaseItemAmount, decreaseItemAmount } = cartSlice.actions;
 
 export default cartSlice.reducer;
