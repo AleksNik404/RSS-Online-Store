@@ -2,6 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { ProductType } from '../data/data2';
 
+export type IPromoCode = {
+  initials: string;
+  title: string;
+  discount: number;
+};
+
 export type ProductInCart = {
   id: number;
   title: string;
@@ -19,6 +25,9 @@ interface ICartState {
   cart: ProductTypeInCart[];
   total_amount: number;
   total_price: number;
+  promocodes: IPromoCode[];
+  modelBuyIsOpen: boolean;
+  finalPrice: number;
 }
 
 const getCartStorage = () => {
@@ -31,6 +40,12 @@ const initialState: ICartState = {
   cart: getCartStorage() || [],
   total_amount: 0,
   total_price: 0,
+  promocodes: [
+    { initials: 'RS', title: 'Rolling Scopes School', discount: 15 },
+    { initials: 'EPM', title: 'EPAM Systems', discount: 10 },
+  ],
+  modelBuyIsOpen: false,
+  finalPrice: 0,
 };
 
 const cartSlice = createSlice({
@@ -73,9 +88,16 @@ const cartSlice = createSlice({
       if (amount > 1) state.cart[productIndex].amount -= 1;
       else state.cart = state.cart.filter((product) => product.id !== id);
     },
+    openModalBuy(state) {
+      state.modelBuyIsOpen = true;
+    },
+    closeModalBuy(state) {
+      state.modelBuyIsOpen = false;
+    },
   },
 });
 
-export const { addToCart, calculateTotals, increaseItemAmount, decreaseItemAmount } = cartSlice.actions;
+export const { addToCart, calculateTotals, increaseItemAmount, decreaseItemAmount, openModalBuy, closeModalBuy } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;
