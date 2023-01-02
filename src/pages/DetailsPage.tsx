@@ -70,10 +70,14 @@ const ImagesBox = styled.div`
 const MainImgBox = styled.div`
   width: 100%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const MainImg = styled.img`
-  width: 100%;
+  height: 100%;
+
   object-fit: cover;
 `;
 
@@ -89,11 +93,14 @@ const SmImageBox = styled.div`
   /* height: 100%; */
   /* height: 50px; */
   /* width: 100px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const SmallPhoto = styled.img`
   height: 100%;
-  width: 100%;
+  /* width: 100%; */
   object-fit: cover;
 `;
 

@@ -6,10 +6,7 @@ import { addToCart, calculateTotals, ProductInCart } from '../../store/Slices/ca
 import { useAppDispatch, useAppSelector } from './../../hooks';
 
 const AddCart: React.FC<ProductInCart> = (item) => {
-  const {
-    id,
-    //  price, thumbnail, stock, category, title
-  } = item;
+  const { id } = item;
 
   const { cart } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
