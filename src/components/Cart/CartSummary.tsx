@@ -31,12 +31,11 @@ const CartSummary = () => {
 
   const openModalBuyHandler = () => {
     dispath(openModalBuy());
-    console.log('aaa');
   };
 
   return (
     <Container>
-      {modelBuyIsOpen && <ModalBuy />}
+      {/* {modelBuyIsOpen && <ModalBuy />} */}
       <p>Summary</p>
       <p>Products: {total_amount}</p>
       <p className={activatedPromo.length ? 'strikethrough' : ''}>Total: {total_price}</p>

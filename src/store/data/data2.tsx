@@ -29,7 +29,7 @@ export const products: ProductType[] = [
     stock: 101,
     brand: 'Star Wars',
     category: 'Decor',
-    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/main.jpg',
+    thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/1.png',
     images: [
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/1.png',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/11/2.jpg',
@@ -186,8 +186,8 @@ export const products: ProductType[] = [
     category: 'Statue',
     thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/8/main.avif',
     images: [
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/8/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/8/2.avif',
+      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/8/1.avif',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/8/3.avif',
     ],
     link: 'https://www.sideshow.com/collectibles/star-wars-darth-vader-industrial-empire-kotobukiya-907951',

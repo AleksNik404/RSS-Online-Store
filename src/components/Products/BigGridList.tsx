@@ -26,7 +26,7 @@ const BigGridList = () => {
               <PriceBlock>
                 <p>{item.price.toFixed(2)} $</p>
 
-                <AddCart {...item} />
+                <AddCart amount={1} {...item} />
               </PriceBlock>
             </Description>
           </Item>
@@ -51,11 +51,12 @@ const ImgBox = styled.div`
   align-items: center;
   overflow: hidden;
   max-height: 350px;
-  background-color: #f0f0f0;
+  background-color: #333;
   cursor: pointer;
 `;
 const Image = styled.img`
   max-height: 90%;
+  max-width: 80%;
   object-fit: cover;
   object-position: center;
 `;

@@ -44,7 +44,7 @@ const initialState: ICartState = {
     { initials: 'RS', title: 'Rolling Scopes School', discount: 15 },
     { initials: 'EPM', title: 'EPAM Systems', discount: 10 },
   ],
-  modelBuyIsOpen: false,
+  modelBuyIsOpen: true,
   finalPrice: 0,
 };
 
@@ -94,10 +94,24 @@ const cartSlice = createSlice({
     closeModalBuy(state) {
       state.modelBuyIsOpen = false;
     },
+
+    clearCart(state) {
+      state.cart = [];
+      localStorage.removeItem('Griz-cart');
+      // state.total_amount=0;
+      // state.total_price=0;
+    },
   },
 });
 
-export const { addToCart, calculateTotals, increaseItemAmount, decreaseItemAmount, openModalBuy, closeModalBuy } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  calculateTotals,
+  increaseItemAmount,
+  decreaseItemAmount,
+  openModalBuy,
+  closeModalBuy,
+  clearCart,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

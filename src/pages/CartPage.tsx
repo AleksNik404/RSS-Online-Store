@@ -1,14 +1,20 @@
 import styled from '@emotion/styled';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import CartItem from '../components/Cart/CartItem';
 import CartSummary from '../components/Cart/CartSummary';
 import { useAppSelector } from '../hooks';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+import ModalBuy from '../components/Cart/ModalBuy';
+import { accordionClasses } from '@mui/material';
+import { openModalBuy } from '../store/Slices/cartSlice';
+import { useAppDispatch } from './../hooks';
 
 const CartPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const { cart } = useAppSelector((state) => state.cart);
+  const { modelBuyIsOpen } = useAppSelector((state) => state.cart);
 
   const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
   const [limitOnPage, setLimitOnPage] = useState(Number(searchParams.get('limit')) || 3);
@@ -57,11 +63,13 @@ const CartPage = () => {
     return (
       <Container className="container" style={{ textAlign: 'center' }}>
         В корзине нет Товаров
+        {modelBuyIsOpen && <ModalBuy />}
       </Container>
     );
 
   return (
     <Container className="container">
+      {modelBuyIsOpen && <ModalBuy />}
       <CartContent>
         <CartList>
           <Heading>
