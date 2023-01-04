@@ -19,12 +19,12 @@ const ProductsPage = () => {
 };
 
 const Container = styled.div`
-  padding: 0 40px;
+  padding: 0 20px;
 
   & > .products {
     display: grid;
     grid-template-columns: minmax(160px, 270px) 1fr;
-    gap: 40px;
+    gap: 30px;
   }
 `;
 

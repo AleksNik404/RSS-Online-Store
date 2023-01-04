@@ -7,6 +7,9 @@ import { BsGrid3X3GapFill, BsGridFill } from 'react-icons/bs';
 
 import Sort from './Sort';
 import { setBigGrid, setSmallGrid, updateTextField } from '../../store/Slices/filtersSlice';
+import TextField from '@mui/material/TextField/TextField';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
 const SortPanel = () => {
   const dispatch = useAppDispatch();
@@ -21,11 +24,27 @@ const SortPanel = () => {
 
   return (
     <Container>
-      <input type="text" value={textField} onChange={searchFieldHandler} placeholder="Search Product" />
-      <Sort />
-      <S_Amount>
-        Found items: <span>{filterProducts.length}</span>
-      </S_Amount>
+      <SortBox>
+        <TextField
+          // sx={{
+          //   width: 200,
+          // }}
+          size="small"
+          value={textField}
+          onChange={searchFieldHandler}
+          label="Search Product"
+          id="filled-size-small"
+          variant="filled"
+          fullWidth
+        />
+      </SortBox>
+      {/* <input type="text" value={textField} onChange={searchFieldHandler} placeholder="Search Product" /> */}
+      <SortBox>
+        <S_Amount>
+          Found items: <span>{filterProducts.length}</span>
+        </S_Amount>
+        <Sort />
+      </SortBox>
       <div className="grid-mode">
         <BsGrid3X3GapFill className="grid-icon" onClick={() => dispatch(setSmallGrid())} />
         <BsGridFill className="grid-icon" onClick={() => dispatch(setBigGrid())} />
@@ -43,26 +62,72 @@ const Container = styled.div`
   gap: 20px;
   margin-bottom: 15px;
 
-  @media (max-width: 700) {
-    flex-direction: column;
-  }
-
   .grid-mode {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
 
-    height: 30px;
-    font-size: 20px;
+    font-size: 30px;
+    background-color: var(--main-bg-color-3);
+    padding: 9px 12px;
+    border-radius: 4px;
+    align-self: stretch;
+
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: var(--main-bg-color-3-hover);
+    }
   }
 
   .grid-icon {
     cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      color: #90caf9;
+    }
+  }
+
+  @media (max-width: 720px) {
+    flex-direction: column;
   }
 `;
 
-const S_Amount = styled.p`
+const S_Amount = styled.div`
   white-space: nowrap;
+
+  line-height: 1.3;
+  font-size: 17px;
+  min-width: 9.6rem;
+  padding: 21px 12px 0px 12px;
+
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom: 1px solid #c1c1c1;
+  background-color: var(--main-bg-color-3);
+
+  transition: all 0.2s;
+
+  &:hover {
+    border-bottom: 1px solid #ffffff;
+    background-color: var(--main-bg-color-3-hover);
+  }
+
+  @media (max-width: 990px) {
+    display: none;
+  }
+`;
+
+const SortBox = styled.div`
+  display: flex;
+  gap: 5px;
+
+  min-width: 150px;
+
+  @media (max-width: 720px) {
+    width: 100%;
+  }
 `;
 
 export default SortPanel;

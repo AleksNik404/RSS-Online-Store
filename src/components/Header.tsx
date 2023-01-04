@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import styled from '@emotion/styled';
 
 import { MdShoppingCart } from 'react-icons/md';
-import { calculateTotals } from '../store/Slices/cartSlice';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { calculateTotals, closeModalBuy } from '../store/Slices/cartSlice';
 
 const Header = () => {
   const { total_amount, total_price, cart } = useAppSelector((state) => state.cart);
@@ -17,16 +18,22 @@ const Header = () => {
     dispatch(calculateTotals());
   }, [cart, dispatch]);
 
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname !== '/cart') dispatch(closeModalBuy());
+  }, [location.pathname, dispatch]);
+
   return (
     <Container className="">
-      <div className="container header">
+      <div className="container-min header">
         <Link to="/">
-          <h1 className="">Online Store</h1>
+          <h1 className="header__heading">Online Store</h1>
         </Link>
         <Link to="/cart">
           <div className="cart">
-            <p className="cart-total">{total_price}$ -</p>
-            Cart <MdShoppingCart /> - amount: {total_amount}
+            <p className="cart-total">{!!total_price && `${total_price}$`}</p>
+            {/* <MdShoppingCart /> {total_amount} */}
+            <ShoppingCartIcon /> {total_amount}
           </div>
         </Link>
       </div>
@@ -35,13 +42,17 @@ const Header = () => {
 };
 
 const Container = styled.div`
-  padding: 0 40px;
-  margin-bottom: 50px;
+  padding: 10px 20px;
+  background-color: var(--main-bg-color-2);
 
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .header__heading {
+    margin: 0;
   }
 
   .cart {

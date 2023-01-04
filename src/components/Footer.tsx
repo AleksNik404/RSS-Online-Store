@@ -7,23 +7,21 @@ const Footer = () => {
     <Container>
       <div className="container">
         <div>
-          <a href="">
-            <FaGithubSquare />
-          </a>
-          <a href="">
+          <a href="https://github.com/AleksNik404">
             <FaGithubSquare />
           </a>
         </div>
         <h3>2022</h3>
-        <a href="">RSS Logo</a>
+        <a href="https://rs.school/js/">RSS Logo</a>
       </div>
     </Container>
   );
 };
 
 const Container = styled.div`
-  padding: 0 40px;
-  margin-top: 200px;
+  padding: 10px 40px;
+
+  background-color: var(--main-bg-color-2);
 
   div {
     display: flex;
