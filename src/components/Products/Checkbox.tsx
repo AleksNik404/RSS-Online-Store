@@ -3,6 +3,10 @@ import { updateBrands, updateCategories } from '../../store/Slices/filtersSlice'
 import { useAppSelector, useAppDispatch } from '../../hooks';
 
 import styled from '@emotion/styled';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import { pink, blue, lightBlue } from '@mui/material/colors';
 
 interface ICheckBox {
   type: 'brands' | 'categories';
@@ -11,7 +15,7 @@ interface ICheckBox {
   brand: string;
 }
 
-const Checkbox: React.FC<ICheckBox> = ({ type, filterCount, allCount, brand }) => {
+const Checkbox2: React.FC<ICheckBox> = ({ type, filterCount, allCount, brand }) => {
   const isCheckedtypes = useAppSelector((state) => state.filters[type]);
   const isSelectBrand = isCheckedtypes.includes(brand);
 
@@ -25,27 +29,50 @@ const Checkbox: React.FC<ICheckBox> = ({ type, filterCount, allCount, brand }) =
   };
 
   return (
-    <List key={brand} className={`${!filterCount && 'not-active'}`}>
-      <label htmlFor={brand}>
-        <input type="checkbox" value={brand} id={brand} checked={isSelectBrand} onChange={checkboxHandler} />
-        {brand}
-      </label>
+    <ListItem key={brand} className={`${!filterCount && 'not-active'}`}>
+      {/* <label htmlFor={brand}> */}
+      {/* <input type="checkbox" value={brand} id={brand} checked={isSelectBrand} onChange={checkboxHandler} /> */}
+      <FormControlLabel
+        control={
+          <Checkbox
+            value={brand}
+            checked={isSelectBrand}
+            onChange={checkboxHandler}
+            sx={{
+              '& .MuiCheckbox-root': { padding: 0 },
+              '& .MuiButtonBase-root': { padding: 0 },
+              '& .MuiSvgIcon-root': { fontSize: 22 },
+              '&.Mui-checked': {
+                color: blue[400],
+              },
+              '& .MuiFormControlLabel-root': {
+                color: blue[400],
+              },
+            }}
+          />
+        }
+        label={brand}
+      ></FormControlLabel>
+      {/* {brand} */}
+      {/* </label> */}
       <span>
         ({filterCount}/{allCount})
       </span>
-    </List>
+    </ListItem>
   );
 };
 
-const List = styled.li`
+const ListItem = styled.li`
   display: flex;
-  gap: 10px;
   justify-content: space-between;
+  align-items: center;
+
+  /* white-space: nowrap; */
 
   & > label {
     display: flex;
-    gap: 10px;
+    /* gap: 10px; */
   }
 `;
 
-export default Checkbox;
+export default Checkbox2;

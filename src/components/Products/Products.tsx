@@ -85,6 +85,7 @@ const Products = () => {
 
   if (!filterProducts.length) return <div>No products found</div>;
   if (filters.isBigGrid) return <BigGridList />;
+
   return (
     <div className={style.items}>
       {filterProducts.map((item) => {
@@ -97,7 +98,6 @@ const Products = () => {
               <p className={style.name}>{item.title}</p>
               <div className={style.priceBox}>
                 <p>{item.price.toFixed(2)} $</p>
-
                 <AddCart amount={1} {...item} />
               </div>
             </div>

@@ -5,7 +5,7 @@ import PriceRange from './RangeSliders/PriceRange';
 import StockRange from './RangeSliders/StockRange';
 import { ProductType } from '../../store/data/data2';
 import { updateBrands, updateCategories, resetFilters } from '../../store/Slices/filtersSlice';
-import Checkbox from './Checkbox';
+import Checkbox2 from './Checkbox';
 // import { resetSort } from '../../store/Slices/productsSlice';
 import PriceRange2 from './RangeSliders/PriceRange2';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
@@ -49,34 +49,34 @@ const Filters = () => {
 
   return (
     <S_Filters>
+      <S_Heading>Brands</S_Heading>
       <S_List>
-        <S_Heading>Brands</S_Heading>
         {[...new Set(brands)].map((brand) => {
           const allCount = getCountBrands(brand, products);
           const filterCount = getCountBrands(brand, filterProducts);
 
-          return <Checkbox type={'brands'} key={brand} filterCount={filterCount} allCount={allCount} brand={brand} />;
+          return <Checkbox2 type={'brands'} key={brand} filterCount={filterCount} allCount={allCount} brand={brand} />;
         })}
       </S_List>
+      <S_Heading>Categories</S_Heading>
       <S_List>
-        <S_Heading>Categories</S_Heading>
         {[...new Set(types)].map((category) => {
           const allCount = getCountCategory(category, products);
           const filterCount = getCountCategory(category, filterProducts);
 
           return (
             //prettier-ignore
-            <Checkbox type={'categories'} key={category} filterCount={filterCount} allCount={allCount} brand={category} />
+            <Checkbox2 type={'categories'} key={category} filterCount={filterCount} allCount={allCount} brand={category} />
           );
         })}
         {/* TODO: Исправить именование и мб часть внести в компоненты или дать уникальность range */}
       </S_List>
+      <S_Heading>In Stock</S_Heading>
       <S_Stock>
-        <S_Heading>In Stock</S_Heading>
         <StockRange />
       </S_Stock>
+      <S_Heading>Price</S_Heading>
       <S_Price>
-        <S_Heading>Price</S_Heading>
         <PriceRange />
       </S_Price>
       <button onClick={resetOptions}>Clear Filters</button>
@@ -89,32 +89,33 @@ const Filters = () => {
 const S_Filters = styled.article`
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
 `;
 
-const S_List = styled.article`
+const S_List = styled.ul`
+  padding: 0;
+
   display: flex;
   flex-direction: column;
-  gap: 10px;
 `;
-const S_ListItem = styled.div`
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
+// const S_ListItem = styled.div`
+//   display: flex;
+//   gap: 10px;
+//   justify-content: space-between;
 
-  label {
-    display: flex;
-    gap: 10px;
-  }
-`;
+//   label {
+//     display: flex;
+//     gap: 10px;
+//   }
+// `;
 
 const S_Heading = styled.h4`
   padding: 10px 0px;
   text-transform: uppercase;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #555555;
   position: relative;
 
-  &::after {
+  /* &::after {
     content: '';
 
     height: 3px;
@@ -123,7 +124,7 @@ const S_Heading = styled.h4`
     display: block;
     position: absolute;
     bottom: -2px;
-  }
+  } */
 `;
 
 const S_Stock = styled.article``;

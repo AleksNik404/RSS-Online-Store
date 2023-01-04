@@ -17,8 +17,10 @@ const Main = () => {
 };
 
 const Container = styled.div`
-  padding: 0 40px;
+  padding: 80px 0px 140px 0px;
   flex: 1 0 auto;
+
+  background-color: var(--main-bg-color-1);
 `;
 
 export default Main;

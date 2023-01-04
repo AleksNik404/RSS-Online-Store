@@ -140,7 +140,7 @@ const ModalBuy: React.FC = () => {
       <Form onSubmit={submitHandler}>
         <Heading>Personal details</Heading>
         <div>
-          <h3>Personal details</h3>
+          <Text>Personal details</Text>
           <Input type="text" value={name} onChange={nameFieldHandler} placeholder="Full name" required />
 
           <Input type="phone" value={phone} onChange={phoneFieldHandler} placeholder="phone" required minLength={9} />
@@ -148,17 +148,20 @@ const ModalBuy: React.FC = () => {
         </div>
 
         <div>
-          <h3>Shipping address</h3>
+          <Text>Shipping address</Text>
           <Input type="text" value={address} onChange={addressFieldHandler} placeholder="Shipping address" required />
         </div>
+
         <div>
-          <h3>Payment card</h3>
+          <Text>Payment card</Text>
           {/* prettier-ignore */}
           <Input type="text" value={card} minLength={19} maxLength={19} onChange={cardFieldHandler} onKeyDown={cardFieldHandlerKey} placeholder="card" required />
           {/* prettier-ignore */}
-          <Input type="text" className='exp' value={exp} minLength={5} maxLength={5} onChange={expCardFieldHandler} onKeyDown={cardFieldHandlerKey} placeholder="exp. 12/31" required />
-          {/* prettier-ignore */}
-          <Input type="text" className='ccv' value={ccv} minLength={3} maxLength={3} onChange={ccvCardFieldHandler} onKeyDown={cardFieldHandlerKey} placeholder="ccv" required />
+          <InputRow>
+            <Input type="text" value={exp} minLength={5} maxLength={5} onChange={expCardFieldHandler} onKeyDown={cardFieldHandlerKey} placeholder="exp. 12/31" required />
+            {/* prettier-ignore */}
+            <Input type="text" value={ccv} minLength={3} maxLength={3} onChange={ccvCardFieldHandler} onKeyDown={cardFieldHandlerKey} placeholder="ccv" required />
+          </InputRow>
         </div>
         <button type="submit">Submit</button>
       </Form>
@@ -170,22 +173,24 @@ const Container = styled.div`
   position: fixed;
   inset: 0;
 
-  background-color: rgba(45, 45, 45, 0.8);
+  background-color: rgba(99, 99, 99, 0.603);
+  background-color: rgba(10, 25, 41, 0.603);
+
   display: flex;
   justify-content: center;
+
   align-items: center;
 
   backdrop-filter: blur(1px);
 `;
 
 const Form = styled.form`
-  padding: 20px 40px;
+  padding: 20px 40px 60px;
   margin: 10px 20px;
 
-  background-color: #333;
-  border-radius: 5px;
-  /* min-width: 340px; */
-  min-height: 60%;
+  background-color: rgb(46, 76, 105);
+  background-color: rgb(45, 53, 61);
+  border-radius: 2px;
 
   display: flex;
   flex-direction: column;
@@ -194,14 +199,6 @@ const Form = styled.form`
 
   h3 {
     color: #ddd;
-  }
-
-  .exp {
-    max-width: 45%;
-  }
-
-  .ccv {
-    max-width: 45%;
   }
 `;
 
@@ -212,8 +209,34 @@ const Heading = styled.h1`
   color: #f3f6f9;
 `;
 
+const Text = styled.h3`
+  margin-bottom: 5px;
+`;
+
+const InputRow = styled.div`
+  display: flex;
+  gap: 5px;
+`;
+
 const Input = styled.input`
-  padding: 8px 15px;
+  width: 100%;
+  padding: 12px 15px;
+
+  margin-bottom: 6px;
+
+  border: none;
+  border-bottom: 4px solid transparent;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus:invalid {
+    border-bottom: 4px solid #ff7730;
+  }
+  &:valid {
+    border-bottom: 4px solid #55c57a;
+  }
 `;
 
 export default ModalBuy;
