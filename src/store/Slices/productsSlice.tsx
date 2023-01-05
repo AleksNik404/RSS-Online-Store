@@ -72,8 +72,8 @@ const productsSlice = createSlice({
     updateMinMaxPrice(state) {
       state.minMaxPrice = state.products.reduce(
         (minMax, product) => {
-          const min = Math.min(minMax.min, product.price);
-          const max = Math.max(minMax.max, product.price);
+          const min = Math.trunc(Math.min(minMax.min, product.price));
+          const max = Math.ceil(Math.max(minMax.max, product.price));
           return { min, max };
         },
         { min: Infinity, max: -Infinity }
@@ -120,13 +120,11 @@ const productsSlice = createSlice({
 
       // FIXME: Сделать проверку что цена изменилась с прошлого раза / Infinity ужасно наверно
       if (minPrice !== -Infinity || maxPrice !== Infinity) {
-        // console.log(minPrice, maxPrice);
         newFilteredProducts = newFilteredProducts.filter((item) => item.price >= minPrice && item.price <= maxPrice);
       }
 
       //FIXME: Сделать проверку что количество изменилась с прошлого раза / Infinity ужасно наверно
       if (minStock !== -Infinity || maxStock !== Infinity) {
-        // console.log(minStock, maxStock);
         newFilteredProducts = newFilteredProducts.filter((item) => item.stock >= minStock && item.stock <= maxStock);
       }
 
@@ -140,13 +138,15 @@ const productsSlice = createSlice({
       state.filterProducts = newFilteredProducts;
     },
 
-    // updateSortType(state, { payload }: PayloadAction<UPDATE_SORT_TYPE>) {
-    //   state.query.sort = payload;
-    // },
-
-    // resetSort(state) {
-    //   state.query.sort = 'Sort options';
-    // },
+    clearQuery(state) {
+      state.query.sort = 'Sort options';
+      state.query.minMaxPrice = '';
+      state.query.minMaxStock = '';
+      state.query.textField = '';
+      state.query.brands = '';
+      state.query.categories = '';
+      state.query.isBigGrid = '';
+    },
   },
 });
 
@@ -156,6 +156,7 @@ export const {
   updateMinMaxPrice,
   updateMinMaxStock,
   updateFilterProducts,
+  clearQuery,
   // updateSortType,
   // resetSort,
 } = productsSlice.actions;

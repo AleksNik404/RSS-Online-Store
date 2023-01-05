@@ -27,16 +27,16 @@ const initialState: IFilterState = {
   brands: [],
   categories: [],
   count: 0,
-  reset: false,
   sort: 'Sort options',
   isBigGrid: false,
+  reset: false,
 };
 
 const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    //TODO: 2 похожих функции в 1 / TS не дает все сделать одним. Знаний нет.
+    //TODO: 2 похожих функции в 1
     updateMinMaxPrice(state, { payload: { min, max } }: PayloadAction<{ min: number; max: number }>) {
       state.minMaxPrice = [Math.min(min, max), Math.max(min, max)];
     },
@@ -65,10 +65,10 @@ const filtersSlice = createSlice({
       state.minMaxPrice = [-Infinity, Infinity];
       state.brands = [];
       state.categories = [];
-      //FIXME: моя глупая реализация оповещения обновления)
-      state.reset = !state.reset;
       state.isBigGrid = false;
       state.sort = 'Sort options';
+      //FIXME: костыль на обновление, глупость
+      state.reset = !state.reset;
     },
 
     updateFiltersByquery(state, { payload }) {

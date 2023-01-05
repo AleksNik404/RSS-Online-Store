@@ -9,6 +9,7 @@ import Checkbox2 from './Checkbox';
 // import { resetSort } from '../../store/Slices/productsSlice';
 import PriceRange2 from './RangeSliders/PriceRange2';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { clearQuery } from '../../store/Slices/productsSlice';
 
 const Filters = () => {
   const { products } = useAppSelector((state) => state.products);
@@ -16,6 +17,7 @@ const Filters = () => {
   const [copyButton, setCopyButton] = useState(false);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   // TODO: Оптимизировать функции и сделать уникальной, проблема в типизации была.
   const brands = products.map(({ brand }) => brand);
@@ -31,10 +33,11 @@ const Filters = () => {
 
   // Кнопка сброса фильтров, убрать фильтры в одном сторе, и фернуть дефелтное значение сортировки
   const resetOptions = () => {
-    // dispatch(resetSort());
     dispatch(resetFilters());
+    dispatch(clearQuery());
     //TODO: выбрать вариант по лучше, фикса бага, что иногда url не удаляется при сбросе
-    history.pushState({}, '', location.href.split('?')[0]);
+    // navigate('/');
+    // history.pushState({}, '', location.href.split('?')[0]);
   };
 
   // Скопировать в буффер линк
@@ -97,6 +100,7 @@ const S_List = styled.ul`
 
   display: flex;
   flex-direction: column;
+  gap: 4px;
 `;
 // const S_ListItem = styled.div`
 //   display: flex;

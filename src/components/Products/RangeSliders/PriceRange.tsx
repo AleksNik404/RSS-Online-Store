@@ -3,22 +3,30 @@ import style from './RangeSlider.module.css';
 
 import { useAppSelector, useAppDispatch } from '../../../hooks';
 import { updateMinMaxPrice } from '../../../store/Slices/filtersSlice';
+import { useSearchParams } from 'react-router-dom';
 
 const PriceRange = () => {
   const { minMaxPrice } = useAppSelector((state) => state.products);
   const { reset } = useAppSelector((state) => state.filters);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const minMax = searchParams.get('minMaxPrice')?.split('↕');
+
   //TODO: работать с редаксом
-  const [firstThumb, setFirstThumb] = useState(minMaxPrice.min);
-  const [secondThumb, setSecondThumb] = useState(minMaxPrice.max);
+  // Если есть параметры ставлю с них диапозон. Иначе заглушку и после useffect выставит когда подсчитает другая функция актуальный min max
+  const [firstThumb, setFirstThumb] = useState(minMax ? Number(minMax[0]) : minMaxPrice.min);
+  const [secondThumb, setSecondThumb] = useState(minMax ? Number(minMax[1]) : minMaxPrice.max);
 
   const dispatch = useAppDispatch();
 
-  // При старте сменить границы прайса. (когда произойдет расчет макс и мин. цены продуктов) Или при сбросе фильтров
+  // При старте сменить границы прайса. (когда произойдет расчет макс и мин. цены продуктов)
   useEffect(() => {
+    if (minMax) return;
+
     setFirstThumb(minMaxPrice.min);
     setSecondThumb(minMaxPrice.max);
-  }, [minMaxPrice, reset]);
+  }, [minMax, minMaxPrice]);
 
   const setMinHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstThumb(Number(e.target.value));
@@ -39,26 +47,22 @@ const PriceRange = () => {
       <input
         className={style.slider}
         type="range"
-        step={9}
-        min={Math.trunc(minMaxPrice.min)}
-        max={Math.ceil(minMaxPrice.max)}
+        min={minMaxPrice.min}
+        max={minMaxPrice.max}
         value={firstThumb}
-        // onClick={() => dispatch(updateMinMaxPrice({ min: firstThumb, max: secondThumb }))}
         onChange={setMinHandler}
       />
       <input
         className={style.slider}
         type="range"
-        // step={9}
-        min={Math.trunc(minMaxPrice.min)}
-        max={Math.ceil(minMaxPrice.max)}
+        min={minMaxPrice.min}
+        max={minMaxPrice.max}
         value={secondThumb}
-        // onClick={() => dispatch(updateMinMaxPrice({ min: firstThumb, max: secondThumb }))}
         onChange={setMaxHandler}
       />
       <div className={style.amount}>
-        <span>min: {Math.trunc(Math.min(firstThumb, secondThumb))} $</span>
-        <span>max: {Math.ceil(Math.max(firstThumb, secondThumb))} $</span>
+        <span>min: {Math.min(firstThumb, secondThumb)} $</span>
+        <span>max: {Math.max(firstThumb, secondThumb)} $</span>
       </div>
     </div>
   );
