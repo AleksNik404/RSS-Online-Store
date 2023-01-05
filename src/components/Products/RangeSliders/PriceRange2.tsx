@@ -4,62 +4,69 @@ import style from './RangeSlider.module.css';
 import { useAppSelector, useAppDispatch } from '../../../hooks';
 import { updateMinMaxPrice } from '../../../store/Slices/filtersSlice';
 
-const PriceRange2 = () => {
+const PriceRange = () => {
   const { minMaxPrice } = useAppSelector((state) => state.products);
-  const [minPriceFilt, maxPriceFilt] = useAppSelector((state) => state.filters.minMaxPrice);
-  const { reset } = useAppSelector((state) => state.filters);
+  const { reset, minMaxPrice: minMaxPriceFilt } = useAppSelector((state) => state.filters);
+
+  //TODO: работать с редаксом. Попробывал, но тогда есть баги при установке мин маска.
+  const [firstThumb, setFirstThumb] = useState(minMaxPrice.min);
+  const [secondThumb, setSecondThumb] = useState(minMaxPrice.max);
 
   const dispatch = useAppDispatch();
 
-  //TODO:  Это тестовый компонет.
-  //TODO:  Это тестовый компонет.
-  //TODO:  Это тестовый компонет.
-  //TODO:  Это тестовый компонет.
-  //TODO:  Это тестовый компонет.
-  //TODO:  Это тестовый компонет.
-  //TODO:  Это тестовый компонет.
-  //TODO:  Это тестовый компонет.
-  //TODO:  Это тестовый компонет.
-  //TODO:  Это тестовый компонет.
-
   // При старте сменить границы прайса. (когда произойдет расчет макс и мин. цены продуктов) Или при сбросе фильтров
   useEffect(() => {
-    updateMinMaxPrice({ min: minMaxPrice.min, max: minMaxPrice.max });
-  }, [reset]);
+    setFirstThumb(minMaxPrice.min);
+    setSecondThumb(minMaxPrice.max);
+  }, [minMaxPrice, reset]);
+
+  // Если фильтры не начального состояния, то установить их. Но тогда 2 разза set используется
+  useEffect(() => {
+    const [min, max] = minMaxPriceFilt;
+    if (!isFinite(min) || !isFinite(max)) return;
+
+    setFirstThumb(Math.min(min, max));
+    setSecondThumb(Math.max(min, max));
+  }, [minMaxPriceFilt]);
+
+  const setMinHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFirstThumb(Number(e.target.value));
+    dispatch(updateMinMaxPrice({ min: Number(e.target.value), max: secondThumb }));
+  };
+
+  const setMaxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSecondThumb(Number(e.target.value));
+    dispatch(updateMinMaxPrice({ min: firstThumb, max: Number(e.target.value) }));
+  };
 
   // 1) FIXME: Отображается правильно, но в фильтры идёт предпоследнее значение ползунка, из-за этого Баг фильтрации.
   // 2) FIXME: Оптимизировать обновление, чтоб не 1000 раз менялся фильтр. А например при отпускание интупа. В Реакте onChange работает по другому. Но как?_
   // 3) FIXME: слишком много операци Math.trunc мб уменьшить потом где
+  // 4) FIXME: ТЬМААААААА БАГОВ, убил уже 3 дня на этот компонент........
   return (
     <div className={style.sliderBox}>
       <input
         className={style.slider}
         type="range"
-        step="10"
-        min={Math.trunc(minMaxPrice.min)}
-        max={Math.ceil(minMaxPrice.max)}
-        value={minPriceFilt}
-        onChange={(e) => {
-          dispatch(updateMinMaxPrice({ min: Number(e.target.value), max: maxPriceFilt }));
-        }}
+        min={minMaxPrice.min}
+        max={minMaxPrice.max}
+        value={firstThumb}
+        onChange={setMinHandler}
       />
       <input
         className={style.slider}
         type="range"
-        step="10"
-        min={Math.trunc(minMaxPrice.min)}
-        max={Math.ceil(minMaxPrice.max)}
-        value={maxPriceFilt}
-        onChange={(e) => {
-          dispatch(updateMinMaxPrice({ min: minPriceFilt, max: Number(e.target.value) }));
-        }}
+        min={minMaxPrice.min}
+        max={minMaxPrice.max}
+        value={secondThumb}
+        onChange={setMaxHandler}
       />
       <div className={style.amount}>
-        <span>min: {Math.trunc(Math.min(minPriceFilt, maxPriceFilt))} $</span>
-        <span>max: {Math.ceil(Math.max(minPriceFilt, maxPriceFilt))} $</span>
+        <span>min: {Math.min(firstThumb, secondThumb)} $</span>
+        <span>max: {Math.max(firstThumb, secondThumb)} $</span>
       </div>
     </div>
   );
 };
 
-export default PriceRange2;
+export default PriceRange;

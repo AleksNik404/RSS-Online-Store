@@ -18,7 +18,7 @@ const Main = () => {
 
 const Container = styled.div`
   padding: 80px 0px 140px 0px;
-  flex: 1 0 auto;
+  flex: 1 1 auto;
 
   background-color: var(--main-bg-color-1);
 `;

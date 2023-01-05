@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
+import { BsCreditCardFill } from 'react-icons/bs';
+import { FaCcVisa, FaCcMastercard, FaCcAmex, FaCcJcb, FaCcDiscover } from 'react-icons/Fa';
+import { SiAmericanexpress } from 'react-icons/si';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { clearCart, closeModalBuy } from '../../store/Slices/cartSlice';
 import { useAppDispatch } from './../../hooks';
@@ -39,7 +42,7 @@ const ModalBuy: React.FC = () => {
       clearInterval(timerId);
       navigate('/');
     }, 5000);
-  }, [isSubmit]);
+  }, [isSubmit, navigate]);
 
   const nameFieldHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -128,6 +131,16 @@ const ModalBuy: React.FC = () => {
     setCcv(value);
   };
 
+  const getCardTypeByNumber = (number: string) => {
+    if (number.startsWith('6')) return <FaCcDiscover />;
+    if (number.startsWith('5')) return <FaCcVisa />;
+    if (number.startsWith('4')) return <FaCcMastercard />;
+    if (number.startsWith('3')) return <FaCcJcb />;
+    // if (number === '3') return <SiAmericanexpress />;
+
+    return <BsCreditCardFill />;
+  };
+
   if (isSubmit)
     return (
       <Container>
@@ -140,7 +153,7 @@ const ModalBuy: React.FC = () => {
       <Form onSubmit={submitHandler}>
         <Heading>Personal details</Heading>
         <div>
-          <Text>Personal details</Text>
+          <Text>Сontact information</Text>
           <Input type="text" value={name} onChange={nameFieldHandler} placeholder="Full name" required />
 
           <Input type="phone" value={phone} onChange={phoneFieldHandler} placeholder="phone" required minLength={9} />
@@ -155,7 +168,23 @@ const ModalBuy: React.FC = () => {
         <div>
           <Text>Payment card</Text>
           {/* prettier-ignore */}
-          <Input type="text" value={card} minLength={19} maxLength={19} onChange={cardFieldHandler} onKeyDown={cardFieldHandlerKey} placeholder="card" required />
+
+          <CardNumberBox>
+            <CardIcon>
+              {getCardTypeByNumber(card)}              
+            </CardIcon>
+            <Input
+              type="text"
+              value={card}
+              minLength={19}
+              maxLength={19}
+              onChange={cardFieldHandler}
+              onKeyDown={cardFieldHandlerKey}
+              placeholder="card"
+              required
+            />
+            
+          </CardNumberBox>
           {/* prettier-ignore */}
           <InputRow>
             <Input type="text" value={exp} minLength={5} maxLength={5} onChange={expCardFieldHandler} onKeyDown={cardFieldHandlerKey} placeholder="exp. 12/31" required />
@@ -163,7 +192,7 @@ const ModalBuy: React.FC = () => {
             <Input type="text" value={ccv} minLength={3} maxLength={3} onChange={ccvCardFieldHandler} onKeyDown={cardFieldHandlerKey} placeholder="ccv" required />
           </InputRow>
         </div>
-        <button type="submit">Submit</button>
+        <ButtonBuy type="submit">Submit</ButtonBuy>
       </Form>
     </Container>
   );
@@ -213,6 +242,21 @@ const Text = styled.h3`
   margin-bottom: 5px;
 `;
 
+const CardNumberBox = styled.div`
+  position: relative;
+`;
+
+const CardIcon = styled.div`
+  font-size: 24px;
+  color: black;
+
+  position: absolute;
+  right: 10px;
+  bottom: 50%;
+  transform: translateY(50%);
+  z-index: 1;
+`;
+
 const InputRow = styled.div`
   display: flex;
   gap: 5px;
@@ -220,7 +264,7 @@ const InputRow = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  padding: 12px 15px;
+  padding: 15px 15px 12px 15px;
 
   margin-bottom: 6px;
 
@@ -236,6 +280,23 @@ const Input = styled.input`
   }
   &:valid {
     border-bottom: 4px solid #55c57a;
+  }
+`;
+
+const ButtonBuy = styled.button`
+  padding: 10px 12px;
+  cursor: pointer;
+
+  background-color: #0074e4;
+  border: solid 1px transparent;
+  color: #f5f5f5;
+
+  &:hover {
+    background-color: #007df5;
+  }
+
+  &:active {
+    background-color: #0785ff;
   }
 `;
 

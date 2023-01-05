@@ -6,6 +6,8 @@ import styled from '@emotion/styled';
 import { MdShoppingCart } from 'react-icons/md';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { calculateTotals, closeModalBuy } from '../store/Slices/cartSlice';
+import { resetFilters } from '../store/Slices/filtersSlice';
+import { clearQuery } from '../store/Slices/productsSlice';
 
 const Header = () => {
   const { total_amount, total_price, cart } = useAppSelector((state) => state.cart);
@@ -23,11 +25,18 @@ const Header = () => {
     if (location.pathname !== '/cart') dispatch(closeModalBuy());
   }, [location.pathname, dispatch]);
 
+  const resetOptions = () => {
+    dispatch(resetFilters());
+    dispatch(clearQuery());
+  };
+
   return (
     <Container className="">
       <div className="container-min header">
         <Link to="/">
-          <h1 className="header__heading">Online Store</h1>
+          <h1 className="header__heading" onClick={resetOptions}>
+            Online Store
+          </h1>
         </Link>
         <Link to="/cart">
           <div className="cart">

@@ -23,9 +23,11 @@ const Products = () => {
   const filters = useAppSelector((state) => state.filters);
 
   const dispatch = useAppDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
   const location = useLocation();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Чтоб при старте проверялись url параметры и они обновили фильтры, чтоб они прмиенились.
 
   // FIXME: Столько useEffect зависимостей, не нормально
   // Найти минимальную и максимальную цену на старте для продуктов для слайдера.
@@ -33,11 +35,6 @@ const Products = () => {
     dispatch(updateMinMaxPrice());
     dispatch(updateMinMaxStock());
   }, [dispatch, products]);
-
-  // Чтоб при старте проверялись url параметры и они обновили фильтры, чтоб они прмиенились.
-  useEffect(() => {
-    dispatch(updateFiltersByquery(query));
-  }, [dispatch, query]);
 
   // Этот ужас чтоб на основе фильтров выставлять актуальный url параметры
   useEffect(() => {
@@ -82,6 +79,10 @@ const Products = () => {
     dispatch(updateFilterProducts(filters));
     dispatch(sortItems(sort));
   }, [dispatch, filters, sort]);
+
+  useEffect(() => {
+    dispatch(updateFiltersByquery(query));
+  }, [dispatch, query]);
 
   if (!filterProducts.length) return <div>No products found</div>;
   if (filters.isBigGrid) return <BigGridList />;

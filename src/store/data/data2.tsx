@@ -230,9 +230,9 @@ export const products: ProductType[] = [
     category: 'Decor',
     thumbnail: 'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/10/1.png',
     images: [
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/10/main.jpg',
       'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/10/2.jpg',
-      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/10/3.jpg',
+      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/10/1.png',
+      'https://aleksnik404.github.io/for-Testing.github.io/online-store/data/products/10/main.jpg',
     ],
     link: 'https://art.sideshow.com/art-prints/star-wars-yoda-luminous-beings-sideshow-collectibles-501906U',
     Manufacturer: 'Jerry Vanderstelt',
