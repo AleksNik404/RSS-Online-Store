@@ -137,7 +137,6 @@ const productsSlice = createSlice({
 
       state.filterProducts = newFilteredProducts;
     },
-
     clearQuery(state) {
       state.query.sort = 'Sort options';
       state.query.minMaxPrice = '';
@@ -150,15 +149,7 @@ const productsSlice = createSlice({
   },
 });
 
-export const {
-  sortItems,
-  searchItems,
-  updateMinMaxPrice,
-  updateMinMaxStock,
-  updateFilterProducts,
-  clearQuery,
-  // updateSortType,
-  // resetSort,
-} = productsSlice.actions;
+export const { sortItems, searchItems, updateMinMaxPrice, updateMinMaxStock, updateFilterProducts, clearQuery } =
+  productsSlice.actions;
 
 export default productsSlice.reducer;

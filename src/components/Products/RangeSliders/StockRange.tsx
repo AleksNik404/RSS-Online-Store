@@ -2,38 +2,66 @@
 import React, { useState, useEffect } from 'react';
 import style from './RangeSlider.module.css';
 
-import { useAppSelector } from '../../../hooks';
-import { useAppDispatch } from './../../../hooks';
+import { useAppSelector, useAppDispatch } from '../../../hooks';
 import { updateMinMaxStock } from '../../../store/Slices/filtersSlice';
+import { useSearchParams } from 'react-router-dom';
 
-// interface IRange {
-//   min: number;
-//   max: number;
-// }
-
+// FIXME: В итоге у меня получилось 2 абсолютно похожих компонента... PriceRange - StockRange
 const StockRange = () => {
   const { minMaxStock } = useAppSelector((state) => state.products);
   const { reset } = useAppSelector((state) => state.filters);
 
-  const [firstThumb, setFirstThumb] = useState(minMaxStock.min);
-  const [secondThumb, setSecondThumb] = useState(minMaxStock.max);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const input = React.useRef<HTMLInputElement>(null);
+  const minMax = searchParams.get('minMaxStock')?.split('↕');
+
+  const [firstThumb, setFirstThumb] = useState(minMax ? Number(minMax[0]) : minMaxStock.min);
+  const [secondThumb, setSecondThumb] = useState(minMax ? Number(minMax[1]) : minMaxStock.max);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    if (minMax) return;
+
     setFirstThumb(minMaxStock.min);
     setSecondThumb(minMaxStock.max);
-  }, [minMaxStock, reset]);
+  }, [minMax, minMaxStock, reset]);
+
+  // Долго мучал debounce из lodash но было куча багов, а в итоге обычный таймаут в useEffect все решил.
+  useEffect(() => {
+    const timer = setTimeout(() => dispatch(updateMinMaxStock({ min: firstThumb, max: secondThumb })), 80);
+    return () => clearTimeout(timer);
+  }, [dispatch, firstThumb, secondThumb]);
 
   const setMinHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFirstThumb(Number(e.target.value));
-    dispatch(updateMinMaxStock({ min: Number(e.target.value), max: secondThumb }));
   };
 
   const setMaxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSecondThumb(Number(e.target.value));
-    dispatch(updateMinMaxStock({ min: firstThumb, max: Number(e.target.value) }));
   };
+
+  // Для того чтоб изменялся цвет между диапазона range
+  // Думается можно было сделать лучше
+  if (input.current) {
+    const min = +input.current.min;
+    const max = +input.current.max;
+
+    const range = max - min;
+    const onePercentValue = range / 100;
+
+    const leftPerc = (Math.min(firstThumb, secondThumb) - min) / onePercentValue;
+    const RightPerc = (Math.max(firstThumb, secondThumb) - min) / onePercentValue;
+
+    input.current.style.background = `linear-gradient(
+      to right,
+      #c6c6c6 ${leftPerc}%,
+      var(--primary-btn-color-4) ${leftPerc}%,
+      var(--primary-btn-color-4) ${RightPerc}%,
+      #c6c6c6 ${RightPerc}%
+    )`;
+  }
 
   return (
     <div className={style.sliderBox}>
@@ -43,16 +71,15 @@ const StockRange = () => {
         min={minMaxStock.min}
         max={minMaxStock.max}
         value={firstThumb}
-        // onClick={() => dispatch(updateMinMaxStock({ min: firstThumb, max: secondThumb }))}
         onChange={setMinHandler}
       />
       <input
+        ref={input}
         className={style.slider}
         type="range"
         min={minMaxStock.min}
         max={minMaxStock.max}
         value={secondThumb}
-        // onClick={() => dispatch(updateMinMaxStock({ min: firstThumb, max: secondThumb }))}
         onChange={setMaxHandler}
       />
 

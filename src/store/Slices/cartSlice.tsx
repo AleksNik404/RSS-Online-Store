@@ -43,8 +43,9 @@ const initialState: ICartState = {
   promocodes: [
     { initials: 'RS', title: 'Rolling Scopes School', discount: 15 },
     { initials: 'EPM', title: 'EPAM Systems', discount: 10 },
+    { initials: 'Griz', title: 'Griz Premium', discount: 25 },
   ],
-  modelBuyIsOpen: true,
+  modelBuyIsOpen: false,
   finalPrice: 0,
 };
 

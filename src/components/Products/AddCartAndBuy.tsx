@@ -5,6 +5,7 @@ import { ProductType } from '../../store/data/data2';
 import { addToCart, calculateTotals, openModalBuy } from '../../store/Slices/cartSlice';
 import { useAppDispatch, useAppSelector } from './../../hooks';
 import { useNavigate } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 const AddCartAndBuy: React.FC<ProductType> = (item) => {
   const { id } = item;
@@ -28,11 +29,15 @@ const AddCartAndBuy: React.FC<ProductType> = (item) => {
   };
 
   return (
-    <button onClick={addCartHandler}>
+    <Button onClick={addCartHandler}>
       {'Buy Now'}
       {/* <BsBagPlus /> */}
-    </button>
+    </Button>
   );
 };
+
+const Button = styled.button`
+  cursor: pointer;
+`;
 
 export default AddCartAndBuy;

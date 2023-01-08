@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import 'normalize.css';
-import './index.css';
+import './index.scss';
 import { ThemeProvider, createTheme } from '@mui/material';
 
 import App from './App';
@@ -17,6 +17,9 @@ const root = createRoot(rootElement);
 const theme = createTheme({
   palette: {
     mode: 'dark',
+    // background: {
+    //   paper: '#fff',
+    // },
   },
   typography: {
     fontFamily: ['Lato', 'sans-serif'].join(','),
