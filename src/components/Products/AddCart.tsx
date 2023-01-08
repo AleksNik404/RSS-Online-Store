@@ -55,34 +55,34 @@ const ButtonC = styled.button`
   transition: all 0.3s;
 
   &.btn--add {
-    background-color: #0074e4;
+    background-color: var(--primary-btn-color-1);
     border: solid 1px transparent;
     color: #f5f5f5;
 
     &:hover {
-      background-color: #007df5;
-      border-color: #007df5;
+      background-color: var(--primary-btn-color-2);
+      border-color: var(--primary-btn-color-2);
     }
 
     &:active {
-      background-color: #0785ff;
-      border-color: #0785ff;
+      background-color: var(--primary-btn-color-3);
+      border-color: var(--primary-btn-color-3);
     }
   }
 
   &.btn--delete {
     background-color: transparent;
-    border: solid 1px #f5f5f5;
-    color: #f5f5f5;
+    border: solid 1px var(--main-text-color-1);
+    color: var(--main-text-color-1);
 
     &:hover {
-      border-color: #ff7043;
-      color: #ff7043;
+      border-color: var(--secondary-btn-color-2);
+      color: var(--secondary-btn-color-2);
     }
 
     &:active {
-      border-color: #ff5722;
-      color: #ff5722;
+      border-color: var(--secondary-btn-color-1);
+      color: var(--secondary-btn-color-1);
     }
   }
 `;

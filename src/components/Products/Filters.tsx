@@ -35,9 +35,6 @@ const Filters = () => {
   const resetOptions = () => {
     dispatch(resetFilters());
     dispatch(clearQuery());
-    //TODO: выбрать вариант по лучше, фикса бага, что иногда url не удаляется при сбросе
-    // navigate('/');
-    // history.pushState({}, '', location.href.split('?')[0]);
   };
 
   // Скопировать в буффер линк

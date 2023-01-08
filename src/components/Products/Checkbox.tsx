@@ -39,13 +39,7 @@ const Checkbox2: React.FC<ICheckBox> = ({ type, filterCount, allCount, brand }) 
             checked={isSelectBrand}
             onChange={checkboxHandler}
             sx={{
-              '& .MuiCheckbox-root': { padding: 0 },
-              '& .MuiButtonBase-root': { padding: 0 },
-              '& .MuiSvgIcon-root': { fontSize: 22 },
               '&.Mui-checked': {
-                color: blue[400],
-              },
-              '& .MuiFormControlLabel-root': {
                 color: blue[400],
               },
             }}

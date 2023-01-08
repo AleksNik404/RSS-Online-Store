@@ -42,7 +42,7 @@ const Header = () => {
           <div className="cart">
             <p className="cart-total">{!!total_price && `${total_price}$`}</p>
             {/* <MdShoppingCart /> {total_amount} */}
-            <ShoppingCartIcon /> {total_amount}
+            <ShoppingCartIcon className="cart-icon" /> {total_amount}
           </div>
         </Link>
       </div>
@@ -69,6 +69,16 @@ const Container = styled.div`
     align-items: center;
     gap: 5px;
     /* padding: 5px 10px; */
+  }
+
+  .cart-icon {
+    font-size: 28px;
+
+    transition: color 0.2s;
+  }
+
+  .cart:hover .cart-icon {
+    color: var(--primary-btn-color-2);
   }
 
   .cart-total {

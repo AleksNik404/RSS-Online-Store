@@ -6,7 +6,7 @@ import CartSummary from '../components/Cart/CartSummary';
 import { useAppSelector } from '../hooks';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import ModalBuy from '../components/Cart/ModalBuy';
-import { accordionClasses } from '@mui/material';
+import { accordionClasses, TextField } from '@mui/material';
 import { openModalBuy } from '../store/Slices/cartSlice';
 import { useAppDispatch } from './../hooks';
 
@@ -62,7 +62,8 @@ const CartPage = () => {
   if (!cart.length)
     return (
       <Container className="container" style={{ textAlign: 'center' }}>
-        В корзине нет Товаров
+        Cart is Empty
+        {/* Уже не помню зачем эта строчка, но выглядит не нужной */}
         {modelBuyIsOpen && <ModalBuy />}
       </Container>
     );
@@ -76,15 +77,12 @@ const CartPage = () => {
             <p>Products In Cart</p>
             <div className="pages">
               <p>LIMIT:</p>
-              <input type="number" value={limitOnPage} onChange={limitHandler} />
+
+              <Input type="number" value={limitOnPage} onChange={limitHandler} />
               <p>PAGE:</p>
-              <button onClick={decreasePage}>
-                <AiOutlineLeft />
-              </button>
+              <Button onClick={decreasePage}>&lt;</Button>
               <span>{page}</span>
-              <button onClick={increasePage}>
-                <AiOutlineRight />
-              </button>
+              <Button onClick={increasePage}>&gt;</Button>
             </div>
           </Heading>
           <ProductList>
@@ -109,7 +107,55 @@ const CartContent = styled.div`
   display: grid;
   grid-template-columns: 7fr 3fr;
   gap: 30px;
+
+  @media (max-width: 1050px) {
+    grid-template-columns: 1fr;
+  }
 `;
+const Input = styled.input`
+  background-color: transparent;
+  padding: 7px 15px;
+
+  border: 1px solid var(--main-bg-color-5);
+  border-radius: 5px;
+
+  color: inherit;
+  max-width: 100px;
+
+  outline: none;
+
+  &:active {
+    border: 1px solid var(--primary-btn-color-4);
+  }
+  &:focus {
+    border: 1px solid var(--primary-btn-color-4);
+  }
+`;
+
+const Button = styled.button`
+  font-size: 22px;
+  width: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-radius: 5px;
+  border: none;
+
+  background-color: var(--primary-btn-color-3);
+
+  &:hover {
+    background-color: var(--primary-btn-color-2);
+  }
+
+  &:active {
+    background-color: var(--primary-btn-color-1);
+  }
+`;
+
 const CartList = styled.div`
   /* background-color: bisque; */
 `;
@@ -129,6 +175,9 @@ const Heading = styled.div`
   }
 `;
 
-const ProductList = styled.div``;
+const ProductList = styled.div`
+  display: grid;
+  grid-auto-rows: 160px;
+`;
 
 export default CartPage;

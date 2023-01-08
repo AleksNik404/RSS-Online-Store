@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import styled from '@emotion/styled';
-import { BsBagPlus, BsBagCheck } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import style from './Products.module.css';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
@@ -14,7 +13,6 @@ import {
 import { updateFiltersByquery } from '../../store/Slices/filtersSlice';
 import AddCart from './AddCart';
 import BigGridList from './BigGridList';
-import { calculateTotals } from '../../store/Slices/cartSlice';
 
 const Products = () => {
   const { products, filterProducts, query } = useAppSelector((state) => state.products);
