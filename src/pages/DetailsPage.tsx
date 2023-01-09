@@ -109,8 +109,12 @@ const History = styled.div`
   display: flex;
   gap: 5px;
 
+  & > .history-link {
+    transition: all 0.2s;
+  }
+
   & > .history-link:hover {
-    color: #007df5;
+    color: var(--primary-btn-color-6);
   }
 
   & > .history-link::after {

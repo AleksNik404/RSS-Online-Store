@@ -49,9 +49,9 @@ const CartSummary = () => {
       {/* {modelBuyIsOpen && <ModalBuy />} */}
       <h2>Summary</h2>
       <Paragraph>Products: {total_amount}</Paragraph>
-      <Paragraph className={activatedPromo.length ? 'strikethrough' : ''}>Total: {total_price}</Paragraph>
+      <Paragraph className={activatedPromo.length ? 'strikethrough' : ''}>Total: {total_price} $</Paragraph>
 
-      {activatedPromo.length > 0 && <p>Total: {(total_price - (total_price / 100) * totalDiscount).toFixed(2)}</p>}
+      {activatedPromo.length > 0 && <p>Total: {(total_price - (total_price / 100) * totalDiscount).toFixed(2)} $</p>}
       {activatedPromo.length > 0 && (
         <ActivePromoBox>
           <Paragraph>Applied codes</Paragraph>

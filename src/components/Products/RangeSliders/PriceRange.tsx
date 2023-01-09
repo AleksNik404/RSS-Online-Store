@@ -8,7 +8,7 @@ import styled from '@emotion/styled';
 
 // FIXME: В итоге у меня получилось 2 абсолютно похожих компонента... PriceRange - StockRange
 const PriceRange = () => {
-  const { minMaxPrice } = useAppSelector((state) => state.products);
+  const { minMaxPrice, minMaxFiltPrice } = useAppSelector((state) => state.products);
   const { reset } = useAppSelector((state) => state.filters);
 
   const [searchParams, setSearchParams] = useSearchParams();

@@ -74,12 +74,12 @@ const CartPage = () => {
       <CartContent>
         <CartList>
           <Heading>
-            <p>Products In Cart</p>
+            <ParagraphDisplay>Products In Cart</ParagraphDisplay>
             <div className="pages">
-              <p>LIMIT:</p>
+              <ParagraphDisplay>LIMIT:</ParagraphDisplay>
 
               <Input type="number" value={limitOnPage} onChange={limitHandler} />
-              <p>PAGE:</p>
+              <ParagraphDisplay>PAGE:</ParagraphDisplay>
               <Controlls>
                 <Button onClick={decreasePage}>&lt;</Button>
                 <span>{page}</span>
@@ -173,6 +173,10 @@ const Heading = styled.div`
 
   padding: 5px 10px;
 
+  @media (max-width: 600px) {
+    justify-content: right;
+  }
+
   & > .pages {
     display: flex;
     gap: 5px;
@@ -192,6 +196,12 @@ const Controlls = styled.div`
   align-items: center;
   justify-items: center;
   gap: 2px;
+`;
+
+const ParagraphDisplay = styled.p`
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 export default CartPage;

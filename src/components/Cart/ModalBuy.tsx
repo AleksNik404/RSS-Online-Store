@@ -13,7 +13,7 @@ const ModalBuy: React.FC = () => {
   const navigate = useNavigate();
 
   const [isSubmit, setIsSubmit] = useState(false);
-  const [secToRedirect, setSecToRedirect] = useState(3);
+  const [secToRedirect, setSecToRedirect] = useState(5);
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -43,7 +43,7 @@ const ModalBuy: React.FC = () => {
       clearInterval(timerId);
 
       navigate('/');
-    }, 3000);
+    }, 5000);
   }, [dispatch, isSubmit, navigate]);
 
   const nameFieldHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,6 +81,9 @@ const ModalBuy: React.FC = () => {
 
   const emailFieldHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
+    // [a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?
+    if (!event.target.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) event.target.setCustomValidity(`Некорректный e-mail`);
+    else event.target.setCustomValidity(``);
   };
 
   const cardFieldHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,7 +104,7 @@ const ModalBuy: React.FC = () => {
   const cardFieldHandlerKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const validKey = ['Backspace', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Delete'];
 
-    if (!validKey.includes(event.key) && !isFinite(+event.key)) {
+    if ((!validKey.includes(event.key) && !isFinite(+event.key)) || event.code === 'Space') {
       event.preventDefault();
     }
   };

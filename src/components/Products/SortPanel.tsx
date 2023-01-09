@@ -46,8 +46,14 @@ const SortPanel = () => {
         <Sort />
       </SortBox>
       <div className="grid-mode">
-        <BsGrid3X3GapFill className="grid-icon" onClick={() => dispatch(setSmallGrid())} />
-        <BsGridFill className="grid-icon" onClick={() => dispatch(setBigGrid())} />
+        <BsGrid3X3GapFill
+          className={`${isBigGrid ? 'grid-icon' : 'grid-icon--active'}`}
+          onClick={() => dispatch(setSmallGrid())}
+        />
+        <BsGridFill
+          className={`${isBigGrid ? 'grid-icon--active' : 'grid-icon'}`}
+          onClick={() => dispatch(setBigGrid())}
+        />
       </div>
     </Container>
   );
@@ -85,8 +91,12 @@ const Container = styled.div`
     transition: all 0.2s;
 
     &:hover {
-      color: #90caf9;
+      color: var(--primary-btn-color-2);
     }
+  }
+
+  .grid-icon--active {
+    color: var(--primary-btn-color-5);
   }
 
   @media (max-width: 720px) {

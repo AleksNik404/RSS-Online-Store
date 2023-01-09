@@ -9,6 +9,8 @@ import {
   updateMinMaxStock,
   updateFilterProducts,
   sortItems,
+  updateMinMaxFiltPrice,
+  updateMinMaxFiltStock,
 } from '../../store/Slices/productsSlice';
 import { updateFiltersByquery } from '../../store/Slices/filtersSlice';
 import AddCart from './AddCart';
@@ -16,13 +18,11 @@ import BigGridList from './BigGridList';
 
 const Products = () => {
   const { products, filterProducts, query, minMaxPrice, minMaxStock } = useAppSelector((state) => state.products);
-  const { cart } = useAppSelector((state) => state.cart);
+  const productsa = useAppSelector((state) => state.products);
   const { sort } = useAppSelector((state) => state.filters);
   const filters = useAppSelector((state) => state.filters);
 
   const dispatch = useAppDispatch();
-  const location = useLocation();
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   // FIXME: Столько useEffect зависимостей, не нормально?
@@ -88,6 +88,10 @@ const Products = () => {
   // При изминение фильтров пересчитывались товары
   useEffect(() => {
     dispatch(updateFilterProducts(filters));
+
+    // dispatch(updateMinMaxFiltPrice());
+    // dispatch(updateMinMaxFiltStock());
+
     dispatch(sortItems(sort));
   }, [dispatch, filters, sort]);
 

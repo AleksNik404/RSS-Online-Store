@@ -59,7 +59,7 @@ const CartItem: React.FC<ICartItem> = ({ item, index }) => {
             +
           </ButtonRight>
         </Controlls>
-        <p>Price: {(item.price * item.amount).toFixed(2)}</p>
+        <p>Price: {(item.price * item.amount).toFixed(2)} $</p>
       </AmountBox>
     </Container>
   );
@@ -73,6 +73,10 @@ const Container = styled.div`
 
   padding: 10px 10px;
   border-bottom: 1px solid #444;
+
+  @media (max-width: 630px) {
+    grid-template-columns: 20px 150px 1fr;
+  }
 
   & > span {
     text-align: center;
@@ -111,6 +115,10 @@ const Details = styled.div`
   align-items: center;
   gap: 8px;
 
+  @media (max-width: 630px) {
+    display: none;
+  }
+
   & > .name {
     font-weight: 700;
   }
@@ -127,6 +135,10 @@ const AmountBox = styled.div`
   gap: 10px;
 
   user-select: none;
+
+  @media (max-width: 630px) {
+    justify-self: end;
+  }
 `;
 
 const Controlls = styled.div`

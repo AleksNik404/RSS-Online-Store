@@ -22,11 +22,11 @@ const initialState = {
   products,
   filterProducts: products,
 
-  minMaxPrice: { min: 0, max: 1 },
-  minMaxStock: { min: 0, max: 1 },
+  minMaxPrice: { min: Infinity, max: -Infinity },
+  minMaxStock: { min: Infinity, max: -Infinity },
 
-  minMaxFiltPrice: { min: 0, max: 1 },
-  minMaxFiltStock: { min: 0, max: 1 },
+  minMaxFiltPrice: { min: Infinity, max: -Infinity },
+  minMaxFiltStock: { min: Infinity, max: -Infinity },
 
   query: {
     sort: urlParams.get('sort') || 'Sort options',
@@ -83,8 +83,33 @@ const productsSlice = createSlice({
     updateMinMaxStock(state) {
       state.minMaxStock = state.products.reduce(
         (minMax, product) => {
+          // TODO:  не помню зачем (|| 0)
           const min = Math.min(minMax.min || 0, product.stock);
           const max = Math.max(minMax.max || 0, product.stock);
+          return { min, max };
+        },
+        { min: Infinity, max: -Infinity }
+      );
+    },
+
+    updateMinMaxFiltPrice(state) {
+      console.log('updateMinMaxFiltPrice');
+      state.minMaxFiltPrice = state.filterProducts.reduce(
+        (minMax, product) => {
+          const min = Math.trunc(Math.min(minMax.min, product.price));
+          const max = Math.ceil(Math.max(minMax.max, product.price));
+          return { min, max };
+        },
+        { min: Infinity, max: -Infinity }
+      );
+    },
+
+    updateMinMaxFiltStock(state) {
+      console.log('updateMinMaxFiltStock');
+      state.minMaxFiltStock = state.filterProducts.reduce(
+        (minMax, product) => {
+          const min = Math.min(minMax.min, product.stock);
+          const max = Math.max(minMax.max, product.stock);
           return { min, max };
         },
         { min: Infinity, max: -Infinity }
@@ -149,7 +174,15 @@ const productsSlice = createSlice({
   },
 });
 
-export const { sortItems, searchItems, updateMinMaxPrice, updateMinMaxStock, updateFilterProducts, clearQuery } =
-  productsSlice.actions;
+export const {
+  sortItems,
+  searchItems,
+  updateMinMaxPrice,
+  updateMinMaxStock,
+  updateFilterProducts,
+  clearQuery,
+  updateMinMaxFiltPrice,
+  updateMinMaxFiltStock,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;

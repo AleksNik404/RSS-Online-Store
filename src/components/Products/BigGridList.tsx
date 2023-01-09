@@ -61,7 +61,15 @@ const Container = styled.div`
 const Item = styled.div`
   display: grid;
   gap: 20px;
-  grid-template-columns: 350px 1fr;
+  /* grid-template-columns: 350px 1fr; */
+  grid-template-columns: minmax(150px, 350px) minmax(300px, 1fr);
+
+  @media (max-width: 710px) {
+    grid-template-columns: 1fr;
+
+    padding-bottom: 40px;
+    border-bottom: 5px solid var(--main-bg-color-5);
+  }
 `;
 
 const ImgBox = styled.div`
@@ -76,6 +84,7 @@ const ImgBox = styled.div`
 const Image = styled.img`
   max-height: 90%;
   max-width: 80%;
+  /* max-height: minmax(80%, 350px); */
   object-fit: cover;
   object-position: center;
 `;
@@ -112,6 +121,7 @@ const TypeBox = styled.div`
 const PriceBlock = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export default BigGridList;
