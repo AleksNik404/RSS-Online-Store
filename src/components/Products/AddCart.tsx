@@ -3,10 +3,8 @@ import React, { useEffect } from 'react';
 import { BsBagPlus } from 'react-icons/bs';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 
-import { ProductType } from '../../store/data/data2';
-import { addToCart, calculateTotals, ProductInCart } from '../../store/Slices/cartSlice';
+import { addToCart, ProductInCart } from '../../store/Slices/cartSlice';
 import { useAppDispatch, useAppSelector } from './../../hooks';
 import styled from '@emotion/styled';
 

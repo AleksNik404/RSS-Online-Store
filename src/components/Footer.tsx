@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { FaGithubSquare } from 'react-icons/Fa';
-// import { ReactComponent as RSSlogo } from './../assets/RSSlogo.svg';
 
 const Footer = () => {
-  // console.log(RSSlogo);
   return (
     <Container>
       <div className="container">

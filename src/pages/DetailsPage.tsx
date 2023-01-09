@@ -1,16 +1,16 @@
-import styled from '@emotion/styled';
 import React, { useState } from 'react';
-import { useLocation, useParams, useNavigate, Link } from 'react-router-dom';
-import AddCart from '../components/Products/AddCart';
-import AddCartAndBuy from '../components/Products/AddCartAndBuy';
+import { useParams, Link } from 'react-router-dom';
+import styled from '@emotion/styled';
+
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { resetFilters, updateFiltersByquery } from '../store/Slices/filtersSlice';
 import { clearQuery } from '../store/Slices/productsSlice';
 import ErrorPage from './ErrorPage';
+import AddCart from '../components/Products/AddCart';
+import AddCartAndBuy from '../components/Products/AddCartAndBuy';
 
 const DetailsPage = () => {
-  const { products, query } = useAppSelector((state) => state.products);
-  const filters = useAppSelector((state) => state.filters);
+  const { products } = useAppSelector((state) => state.products);
   const dispatch = useAppDispatch();
 
   const { id } = useParams();

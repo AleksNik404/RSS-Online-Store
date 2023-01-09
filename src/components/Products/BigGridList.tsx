@@ -1,10 +1,11 @@
 import React from 'react';
-import { useAppSelector } from '../../hooks';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import blue from '@mui/material/colors/blue';
 import styled from '@emotion/styled';
+
+import { useAppSelector } from '../../hooks';
 import AddCart from './AddCart';
 import Rating from '@mui/material/Rating';
-import blue from '@mui/material/colors/blue';
 
 const BigGridList = () => {
   const { filterProducts } = useAppSelector((state) => state.products);
@@ -35,7 +36,6 @@ const BigGridList = () => {
                     precision={0.25}
                     readOnly
                   />
-                  {/* {item.rating} */}
                 </TypeBox>
                 <p>{item.description}</p>
                 <p>{item.description2}</p>

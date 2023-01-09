@@ -5,8 +5,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks';
 import styled from '@emotion/styled';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import { pink, blue, lightBlue } from '@mui/material/colors';
+import { blue } from '@mui/material/colors';
 
 interface ICheckBox {
   type: 'brands' | 'categories';
@@ -47,8 +46,6 @@ const Checkbox2: React.FC<ICheckBox> = ({ type, filterCount, allCount, brand }) 
         }
         label={brand}
       ></FormControlLabel>
-      {/* {brand} */}
-      {/* </label> */}
       <span>
         ({filterCount}/{allCount})
       </span>

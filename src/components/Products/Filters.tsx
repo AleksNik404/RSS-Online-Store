@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import PriceRange from './RangeSliders/PriceRange';
-import StockRange from './RangeSliders/StockRange';
-import { ProductType } from '../../store/data/data2';
-import { updateBrands, updateCategories, resetFilters } from '../../store/Slices/filtersSlice';
 import Checkbox2 from './Checkbox';
-// import { resetSort } from '../../store/Slices/productsSlice';
-import PriceRange2 from './RangeSliders/PriceRange2';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { ProductType } from '../../store/data/data2';
+import { resetFilters } from '../../store/Slices/filtersSlice';
 import { clearQuery } from '../../store/Slices/productsSlice';
+import StockRange from './RangeSliders/StockRange';
+import PriceRange from './RangeSliders/PriceRange';
 
 const Filters = () => {
   const { products } = useAppSelector((state) => state.products);
@@ -95,7 +92,6 @@ const Filters = () => {
       </ButtonsBox>
     </S_Filters>
   );
-  resetButton;
 };
 
 // TODO: Решить что делать с стилями. Надо будет привести к 1 стилю или styled или *.module.css

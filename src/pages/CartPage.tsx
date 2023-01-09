@@ -1,14 +1,11 @@
 import styled from '@emotion/styled';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import CartItem from '../components/Cart/CartItem';
 import CartSummary from '../components/Cart/CartSummary';
 import { useAppSelector } from '../hooks';
-import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
+
 import ModalBuy from '../components/Cart/ModalBuy';
-import { accordionClasses, TextField } from '@mui/material';
-import { openModalBuy } from '../store/Slices/cartSlice';
-import { useAppDispatch } from './../hooks';
 
 const CartPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -63,8 +60,6 @@ const CartPage = () => {
     return (
       <Container className="container" style={{ textAlign: 'center' }}>
         Cart is Empty
-        {/* Уже не помню зачем эта строчка, но выглядит не нужной */}
-        {/* {modelBuyIsOpen && <ModalBuy />} */}
       </Container>
     );
 

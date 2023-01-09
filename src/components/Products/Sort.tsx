@@ -5,9 +5,7 @@ import { sortItems } from '../../store/Slices/productsSlice';
 import { setSortFilter } from '../../store/Slices/filtersSlice';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import Box from '@mui/material/Box';
 import styled from '@emotion/styled';
-// import { updateSortType } from '../../store/Slices/productsSlice';
 
 const Sort = () => {
   const dispath = useAppDispatch();
@@ -17,8 +15,6 @@ const Sort = () => {
   const sortHandler = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     dispath(setSortFilter(event.target.value));
     dispath(sortItems(event.target.value));
-    // dispath(updateSortType(event.target.value));
-    //TODO: Понять почему работает без нижней функции, и почему есть баг при сортировке.
   };
 
   return (
@@ -26,9 +22,7 @@ const Sort = () => {
       <TextField
         id="filled-select-currency"
         select
-        // label="Sort options"
         label={`${sort === 'Sort options' ? '' : 'Sort By:'}`}
-        // defaultValue="Sort options"
         variant="filled"
         size="small"
         fullWidth

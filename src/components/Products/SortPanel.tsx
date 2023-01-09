@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { searchItems } from '../../store/Slices/productsSlice';
 
 import styled from '@emotion/styled';
 import { BsGrid3X3GapFill, BsGridFill } from 'react-icons/bs';
@@ -8,8 +7,6 @@ import { BsGrid3X3GapFill, BsGridFill } from 'react-icons/bs';
 import Sort from './Sort';
 import { setBigGrid, setSmallGrid, updateTextField } from '../../store/Slices/filtersSlice';
 import TextField from '@mui/material/TextField/TextField';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 
 const SortPanel = () => {
   const dispatch = useAppDispatch();
@@ -26,9 +23,6 @@ const SortPanel = () => {
     <Container>
       <SortBox>
         <TextField
-          // sx={{
-          //   width: 200,
-          // }}
           size="small"
           value={textField}
           onChange={searchFieldHandler}
@@ -38,7 +32,6 @@ const SortPanel = () => {
           fullWidth
         />
       </SortBox>
-      {/* <input type="text" value={textField} onChange={searchFieldHandler} placeholder="Search Product" /> */}
       <SortBox>
         <S_Amount>
           Found items: <span>{filterProducts.length}</span>

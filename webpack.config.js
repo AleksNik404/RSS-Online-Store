@@ -26,8 +26,9 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
+      favicon: './src/assets/favicon.ico',
     }),
-   
+
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
@@ -55,7 +56,7 @@ const config = {
         use: [stylesHandler, 'css-loader', 'postcss-loader'],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|gif|jpe?g|webp)$/i,
+        test: /\.(eot|svg|ttf|woff|woff2|png|gif|jpe?g|webp|ico)$/i,
         type: 'asset',
       },
       {

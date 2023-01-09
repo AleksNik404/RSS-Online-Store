@@ -1,11 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { products } from '../data/data2';
-
 import { SortDirection } from '../../types';
-import { useParams, useSearchParams } from 'react-router-dom';
-import { ProductType } from '../data/data2';
-
-type UPDATE_SORT_TYPE = string;
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -24,9 +20,6 @@ const initialState = {
 
   minMaxPrice: { min: Infinity, max: -Infinity },
   minMaxStock: { min: Infinity, max: -Infinity },
-
-  minMaxFiltPrice: { min: Infinity, max: -Infinity },
-  minMaxFiltStock: { min: Infinity, max: -Infinity },
 
   query: {
     sort: urlParams.get('sort') || 'Sort options',
@@ -92,30 +85,6 @@ const productsSlice = createSlice({
       );
     },
 
-    updateMinMaxFiltPrice(state) {
-      console.log('updateMinMaxFiltPrice');
-      state.minMaxFiltPrice = state.filterProducts.reduce(
-        (minMax, product) => {
-          const min = Math.trunc(Math.min(minMax.min, product.price));
-          const max = Math.ceil(Math.max(minMax.max, product.price));
-          return { min, max };
-        },
-        { min: Infinity, max: -Infinity }
-      );
-    },
-
-    updateMinMaxFiltStock(state) {
-      console.log('updateMinMaxFiltStock');
-      state.minMaxFiltStock = state.filterProducts.reduce(
-        (minMax, product) => {
-          const min = Math.min(minMax.min, product.stock);
-          const max = Math.max(minMax.max, product.stock);
-          return { min, max };
-        },
-        { min: Infinity, max: -Infinity }
-      );
-    },
-
     updateFilterProducts(state, { payload: filters }) {
       let newFilteredProducts = [...state.products];
 
@@ -174,15 +143,7 @@ const productsSlice = createSlice({
   },
 });
 
-export const {
-  sortItems,
-  searchItems,
-  updateMinMaxPrice,
-  updateMinMaxStock,
-  updateFilterProducts,
-  clearQuery,
-  updateMinMaxFiltPrice,
-  updateMinMaxFiltStock,
-} = productsSlice.actions;
+export const { sortItems, searchItems, updateMinMaxPrice, updateMinMaxStock, updateFilterProducts, clearQuery } =
+  productsSlice.actions;
 
 export default productsSlice.reducer;

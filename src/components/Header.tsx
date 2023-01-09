@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import styled from '@emotion/styled';
 
-import { MdShoppingCart } from 'react-icons/md';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { calculateTotals, closeModalBuy } from '../store/Slices/cartSlice';
 import { resetFilters } from '../store/Slices/filtersSlice';
@@ -41,7 +40,6 @@ const Header = () => {
         <Link to="/cart">
           <div className="cart">
             <p className="cart-total">{!!total_price && `${total_price}$`}</p>
-            {/* <MdShoppingCart /> {total_amount} */}
             <ShoppingCartIcon className="cart-icon" /> {total_amount}
           </div>
         </Link>
@@ -68,12 +66,10 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
-    /* padding: 5px 10px; */
   }
 
   .cart-icon {
     font-size: 28px;
-
     transition: color 0.2s;
   }
 

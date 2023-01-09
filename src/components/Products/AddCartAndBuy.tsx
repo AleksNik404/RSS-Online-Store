@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { BsBagPlus } from 'react-icons/bs';
-
-import { ProductType } from '../../store/data/data2';
-import { addToCart, calculateTotals, openModalBuy } from '../../store/Slices/cartSlice';
-import { useAppDispatch, useAppSelector } from './../../hooks';
 import { useNavigate } from 'react-router-dom';
+
+import { BsBagPlus } from 'react-icons/bs';
+import { ProductType } from '../../store/data/data2';
+import { addToCart, openModalBuy } from '../../store/Slices/cartSlice';
+import { useAppDispatch, useAppSelector } from './../../hooks';
 import styled from '@emotion/styled';
 
 const AddCartAndBuy: React.FC<ProductType> = (item) => {

@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
 import style from './Products.module.css';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import {
   updateMinMaxPrice,
   updateMinMaxStock,
   updateFilterProducts,
   sortItems,
-  updateMinMaxFiltPrice,
-  updateMinMaxFiltStock,
 } from '../../store/Slices/productsSlice';
 import { updateFiltersByquery } from '../../store/Slices/filtersSlice';
 import AddCart from './AddCart';
@@ -18,7 +17,6 @@ import BigGridList from './BigGridList';
 
 const Products = () => {
   const { products, filterProducts, query, minMaxPrice, minMaxStock } = useAppSelector((state) => state.products);
-  const productsa = useAppSelector((state) => state.products);
   const { sort } = useAppSelector((state) => state.filters);
   const filters = useAppSelector((state) => state.filters);
 
@@ -88,10 +86,6 @@ const Products = () => {
   // При изминение фильтров пересчитывались товары
   useEffect(() => {
     dispatch(updateFilterProducts(filters));
-
-    // dispatch(updateMinMaxFiltPrice());
-    // dispatch(updateMinMaxFiltStock());
-
     dispatch(sortItems(sort));
   }, [dispatch, filters, sort]);
 
