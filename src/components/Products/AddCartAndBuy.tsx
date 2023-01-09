@@ -38,6 +38,25 @@ const AddCartAndBuy: React.FC<ProductType> = (item) => {
 
 const Button = styled.button`
   cursor: pointer;
+
+  font-size: 14;
+  padding: 6px 12px;
+
+  border-radius: 2px;
+
+  transition: all 0.3s;
+
+  background-color: var(--main-text-color-1);
+  border: solid 1px transparent;
+  color: var(--main-bg-color-3);
+
+  &:hover {
+    background-color: var(--main-text-color-2);
+  }
+
+  &:active {
+    background-color: var(--main-text-color-3);
+  }
 `;
 
 export default AddCartAndBuy;

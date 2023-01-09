@@ -15,7 +15,7 @@ import AddCart from './AddCart';
 import BigGridList from './BigGridList';
 
 const Products = () => {
-  const { products, filterProducts, query } = useAppSelector((state) => state.products);
+  const { products, filterProducts, query, minMaxPrice, minMaxStock } = useAppSelector((state) => state.products);
   const { cart } = useAppSelector((state) => state.cart);
   const { sort } = useAppSelector((state) => state.filters);
   const filters = useAppSelector((state) => state.filters);
@@ -25,16 +25,15 @@ const Products = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Чтоб при старте проверялись url параметры и они обновили фильтры, чтоб они прмиенились.
-
-  // FIXME: Столько useEffect зависимостей, не нормально
+  // FIXME: Столько useEffect зависимостей, не нормально?
   // Найти минимальную и максимальную цену на старте для продуктов для слайдера.
   useEffect(() => {
     dispatch(updateMinMaxPrice());
     dispatch(updateMinMaxStock());
   }, [dispatch, products]);
 
-  // Этот ужас чтоб на основе фильтров выставлять актуальный url параметры
+  // Чтоб при старте проверялись url параметры и они обновили фильтры, чтоб они прмиенились.
+  // Этот УЖАС чтоб на основе фильтров выставлять актуальный url параметры..........
   useEffect(() => {
     const {
       textField,
@@ -55,6 +54,10 @@ const Products = () => {
     if (isFinite(minStock) && isFinite(maxStock)) searchParams.set('minMaxStock', `${minStock}↕${maxStock}`);
     else searchParams.delete('minMaxStock');
 
+    //Сброс фильтров цены и стока. Если макс диапозон. А то в начале сразу ставятся query
+    if (minPrice == minMaxPrice.min && maxPrice == minMaxPrice.max) searchParams.delete('minMaxPrice');
+    if (minStock == minMaxStock.min && maxStock == minMaxStock.max) searchParams.delete('minMaxStock');
+
     if (brands.length) searchParams.set('brands', brands.join('↕'));
     else searchParams.delete('brands');
 
@@ -70,7 +73,17 @@ const Products = () => {
     searchParams.sort();
 
     setSearchParams(searchParams);
-  }, [dispatch, filters, searchParams, setSearchParams, sort]);
+  }, [
+    dispatch,
+    filters,
+    minMaxPrice.max,
+    minMaxPrice.min,
+    minMaxStock.max,
+    minMaxStock.min,
+    searchParams,
+    setSearchParams,
+    sort,
+  ]);
 
   // При изминение фильтров пересчитывались товары
   useEffect(() => {

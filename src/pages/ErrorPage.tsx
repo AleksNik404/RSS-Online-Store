@@ -33,9 +33,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
 
-  /* flex: 0 1 300px; */
   & > div {
-    /* width: 200px; */
     padding: 5px 10px;
     flex: 0 1 300px;
 
@@ -44,21 +42,25 @@ const Container = styled.div`
     gap: 10px;
     justify-content: center;
     align-items: center;
-  }
 
-  & > button {
-    background-color: transparent;
-    border: solid 1px #f5f5f5;
-    color: #f5f5f5;
+    & > button {
+      background-color: transparent;
+      border: solid 1px var(--secondary-btn-color-4);
 
-    &:hover {
-      border-color: #ff7043;
-      color: #ff7043;
-    }
+      color: var(--secondary-btn-color-4);
+      padding: 10px 20px;
 
-    &:active {
-      border-color: #ff5722;
-      color: #ff5722;
+      cursor: pointer;
+
+      &:hover {
+        border: solid 1px var(--secondary-btn-color-1);
+        color: var(--secondary-btn-color-1);
+      }
+
+      &:active {
+        border: solid 1px var(--secondary-btn-color-1);
+        color: var(--secondary-btn-color-1);
+      }
     }
   }
 `;

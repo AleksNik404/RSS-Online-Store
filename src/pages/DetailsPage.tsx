@@ -88,8 +88,10 @@ const DetailsPage = () => {
         <Price>
           <p>{product.price}$</p>
         </Price>
-        <AddCart amount={1} {...product} />
-        <AddCartAndBuy {...product} />
+        <ButtonsBox>
+          <AddCart amount={1} {...product} />
+          <AddCartAndBuy {...product} />
+        </ButtonsBox>
       </DetailsBox>
       <DescriptionBox>
         <h2>About</h2>
@@ -239,6 +241,12 @@ const SmallPhoto = styled.img`
   max-width: 100%;
   object-fit: cover;
   border-radius: 5px;
+`;
+
+const ButtonsBox = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
 `;
 
 export default DetailsPage;

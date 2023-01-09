@@ -26,23 +26,25 @@ const ModalBuy: React.FC = () => {
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // setIsSubmit(true);
+
+    setIsSubmit(true);
   };
 
   useEffect(() => {
     if (!isSubmit) return;
-
-    // dispatch(clearCart());
 
     const timerId = setInterval(() => {
       setSecToRedirect((cur) => cur - 1);
     }, 1000);
 
     setTimeout(() => {
+      dispatch(clearCart());
+      dispatch(closeModalBuy());
       clearInterval(timerId);
+
       navigate('/');
-    }, 5000);
-  }, [isSubmit, navigate]);
+    }, 3000);
+  }, [dispatch, isSubmit, navigate]);
 
   const nameFieldHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -141,12 +143,13 @@ const ModalBuy: React.FC = () => {
     return <BsCreditCardFill />;
   };
 
-  if (isSubmit)
+  if (isSubmit) {
     return (
       <Container>
-        <div>Thanks for your order. Redirect to the store after {secToRedirect} sec</div>
+        <BuyAfterBox>Thanks for your order. Redirect to the store after {secToRedirect} sec</BuyAfterBox>
       </Container>
     );
+  }
 
   return (
     <Container ref={popup} onMouseDown={(e) => e.target === popup.current && dispatch(closeModalBuy())}>
@@ -298,6 +301,15 @@ const ButtonBuy = styled.button`
   &:active {
     background-color: #0785ff;
   }
+`;
+
+const BuyAfterBox = styled.div`
+  background-color: var(--main-bg-color-2);
+
+  padding: 25px 50px;
+  border-radius: 7px;
+
+  font-size: 18px;
 `;
 
 export default ModalBuy;

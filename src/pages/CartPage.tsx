@@ -64,7 +64,7 @@ const CartPage = () => {
       <Container className="container" style={{ textAlign: 'center' }}>
         Cart is Empty
         {/* Уже не помню зачем эта строчка, но выглядит не нужной */}
-        {modelBuyIsOpen && <ModalBuy />}
+        {/* {modelBuyIsOpen && <ModalBuy />} */}
       </Container>
     );
 
@@ -80,9 +80,11 @@ const CartPage = () => {
 
               <Input type="number" value={limitOnPage} onChange={limitHandler} />
               <p>PAGE:</p>
-              <Button onClick={decreasePage}>&lt;</Button>
-              <span>{page}</span>
-              <Button onClick={increasePage}>&gt;</Button>
+              <Controlls>
+                <Button onClick={decreasePage}>&lt;</Button>
+                <span>{page}</span>
+                <Button onClick={increasePage}>&gt;</Button>
+              </Controlls>
             </div>
           </Heading>
           <ProductList>
@@ -146,6 +148,7 @@ const Button = styled.button`
   border: none;
 
   background-color: var(--primary-btn-color-3);
+  color: #f5f5f5;
 
   &:hover {
     background-color: var(--primary-btn-color-2);
@@ -168,6 +171,8 @@ const Heading = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  padding: 5px 10px;
+
   & > .pages {
     display: flex;
     gap: 5px;
@@ -178,6 +183,15 @@ const Heading = styled.div`
 const ProductList = styled.div`
   display: grid;
   grid-auto-rows: 160px;
+`;
+
+const Controlls = styled.div`
+  display: grid;
+  grid-template-columns: 50px 25px 50px;
+
+  align-items: center;
+  justify-items: center;
+  gap: 2px;
 `;
 
 export default CartPage;

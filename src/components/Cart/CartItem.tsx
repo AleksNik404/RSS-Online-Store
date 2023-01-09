@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai';
 import { decreaseItemAmount, increaseItemAmount, ProductTypeInCart } from '../../store/Slices/cartSlice';
 import { useAppDispatch } from './../../hooks';
+import { useNavigate } from 'react-router-dom';
 
 interface ICartItem {
   item: ProductTypeInCart;
@@ -13,6 +14,7 @@ interface ICartItem {
 
 const CartItem: React.FC<ICartItem> = ({ item, index }) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const increaseHandler = () => {
     dispatch(increaseItemAmount(item.id));
@@ -25,7 +27,7 @@ const CartItem: React.FC<ICartItem> = ({ item, index }) => {
   return (
     <Container>
       <span>{index + 1}</span>
-      <CartImageBox>
+      <CartImageBox onClick={() => navigate(`/details/${item.id}`)}>
         <CartImage src={item.thumbnail} alt="product" />
       </CartImageBox>
 
@@ -92,6 +94,8 @@ const CartImageBox = styled.div`
 
   height: 100%;
   width: 100%;
+
+  cursor: pointer;
 `;
 
 const CartImage = styled.img`

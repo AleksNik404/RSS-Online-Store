@@ -75,7 +75,7 @@ const CartSummary = () => {
       )}
       <p>Promo for test: `RS`, `EPM`, `Griz`</p>
 
-      <button onClick={openModalBuyHandler}>Buy Now</button>
+      <ButtonBuy onClick={openModalBuyHandler}>Buy Now</ButtonBuy>
     </Container>
   );
 };
@@ -108,6 +108,8 @@ const ActivePromo = styled.div`
   justify-items: start;
   align-items: center;
 
+  width: 300px;
+
   grid-template-columns: 200px max-content max-content;
 `;
 
@@ -133,6 +135,32 @@ const Button = styled.button`
   &:active {
     border-color: var(--secondary-btn-color-1);
     color: var(--secondary-btn-color-1);
+  }
+`;
+
+const ButtonBuy = styled.button`
+  cursor: pointer;
+
+  font-size: 18;
+  padding: 10px 20px;
+  width: 200px;
+
+  border-radius: 2px;
+
+  transition: all 0.3s;
+
+  background-color: var(--primary-btn-color-1);
+  border: solid 1px transparent;
+  color: #f5f5f5;
+
+  &:hover {
+    background-color: var(--primary-btn-color-2);
+    border-color: var(--primary-btn-color-2);
+  }
+
+  &:active {
+    background-color: var(--primary-btn-color-3);
+    border-color: var(--primary-btn-color-3);
   }
 `;
 

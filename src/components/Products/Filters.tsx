@@ -15,9 +15,9 @@ const Filters = () => {
   const { products } = useAppSelector((state) => state.products);
   const { filterProducts } = useAppSelector((state) => state.products);
   const [copyButton, setCopyButton] = useState(false);
+  const [resetButton, setResetButton] = useState(false);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   // TODO: Оптимизировать функции и сделать уникальной, проблема в типизации была.
   const brands = products.map(({ brand }) => brand);
@@ -35,6 +35,12 @@ const Filters = () => {
   const resetOptions = () => {
     dispatch(resetFilters());
     dispatch(clearQuery());
+
+    setResetButton(true);
+
+    setTimeout(() => {
+      setResetButton(false);
+    }, 1000);
   };
 
   // Скопировать в буффер линк
@@ -79,10 +85,17 @@ const Filters = () => {
       <S_Price>
         <PriceRange />
       </S_Price>
-      <button onClick={resetOptions}>Clear Filters</button>
-      <button onClick={copyLink}>{copyButton ? 'Copied !' : 'Copy Link'}</button>
+      <ButtonsBox>
+        <Button className="btn--reset" onClick={resetOptions}>
+          {resetButton ? 'Сleared !' : 'Clear Filters'}
+        </Button>
+        <Button className="btn--copy" onClick={copyLink}>
+          {copyButton ? 'Copied !' : 'Copy Link'}
+        </Button>
+      </ButtonsBox>
     </S_Filters>
   );
+  resetButton;
 };
 
 // TODO: Решить что делать с стилями. Надо будет привести к 1 стилю или styled или *.module.css
@@ -99,36 +112,63 @@ const S_List = styled.ul`
   flex-direction: column;
   gap: 4px;
 `;
-// const S_ListItem = styled.div`
-//   display: flex;
-//   gap: 10px;
-//   justify-content: space-between;
-
-//   label {
-//     display: flex;
-//     gap: 10px;
-//   }
-// `;
 
 const S_Heading = styled.h4`
   padding: 10px 0px;
   text-transform: uppercase;
   border-bottom: 1px solid #555555;
   position: relative;
-
-  /* &::after {
-    content: '';
-
-    height: 3px;
-    width: 50%;
-    background-color: #bbb;
-    display: block;
-    position: absolute;
-    bottom: -2px;
-  } */
 `;
 
 const S_Stock = styled.article``;
 const S_Price = styled.article``;
+
+const ButtonsBox = styled.div`
+  display: grid;
+  gap: 10px;
+`;
+
+const Button = styled.button`
+  cursor: pointer;
+
+  font-size: 14;
+  padding: 4px 8px;
+
+  border-radius: 2px;
+  border: none;
+  transition: all 0.3s;
+
+  &.btn--reset {
+    background-color: transparent;
+    border: solid 1px var(--secondary-btn-color-4);
+    color: var(--secondary-btn-color-4);
+
+    &:hover {
+      border-color: var(--secondary-btn-color-1);
+      color: var(--secondary-btn-color-1);
+    }
+
+    &:active {
+      border-color: #ff3d00;
+      color: #ff3d00;
+    }
+  }
+
+  &.btn--copy {
+    background-color: transparent;
+    border: solid 1px var(--primary-btn-color-6);
+    color: var(--primary-btn-color-6);
+
+    &:hover {
+      border-color: var(--primary-btn-color-5);
+      color: var(--primary-btn-color-5);
+    }
+
+    &:active {
+      border-color: var(--primary-btn-color-4);
+      color: var(--primary-btn-color-4);
+    }
+  }
+`;
 
 export default Filters;
