@@ -29,8 +29,6 @@ const Checkbox2: React.FC<ICheckBox> = ({ type, filterCount, allCount, brand }) 
 
   return (
     <ListItem key={brand} className={`${!filterCount && 'not-active'}`}>
-      {/* <label htmlFor={brand}> */}
-      {/* <input type="checkbox" value={brand} id={brand} checked={isSelectBrand} onChange={checkboxHandler} /> */}
       <FormControlLabel
         control={
           <Checkbox
@@ -45,7 +43,7 @@ const Checkbox2: React.FC<ICheckBox> = ({ type, filterCount, allCount, brand }) 
           />
         }
         label={brand}
-      ></FormControlLabel>
+      />
       <span>
         ({filterCount}/{allCount})
       </span>
@@ -58,11 +56,8 @@ const ListItem = styled.li`
   justify-content: space-between;
   align-items: center;
 
-  /* white-space: nowrap; */
-
   & > label {
     display: flex;
-    /* gap: 10px; */
   }
 `;
 
