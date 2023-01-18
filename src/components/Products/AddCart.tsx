@@ -27,11 +27,8 @@ const AddCart: React.FC<ProductInCart> = (item) => {
 
   return (
     <ButtonC onClick={addCartHandler} className={inCart ? 'btn--delete' : 'btn--add'}>
-      {/* <Button variant="contained">Contained</Button> */}
       {inCart ? <DeleteIcon /> : <AddShoppingCartIcon />}
-
       <p>{inCart ? 'Remove' : 'Add Cart'}</p>
-      {/* <BsBagPlus /> */}
     </ButtonC>
   );
 };

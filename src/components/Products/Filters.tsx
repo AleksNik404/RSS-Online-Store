@@ -28,7 +28,7 @@ const Filters = () => {
     return arr.filter((item) => item.category === name).length;
   };
 
-  // Кнопка сброса фильтров, убрать фильтры в одном сторе, и фернуть дефелтное значение сортировки
+  // Кнопка сброса фильтров, убрать фильтры в одном сторе, и вернуть дефелтное значение сортировки
   const resetOptions = () => {
     dispatch(resetFilters());
     dispatch(clearQuery());

@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
 import { BsCreditCardFill } from 'react-icons/bs';
-import { FaCcVisa, FaCcMastercard, FaCcAmex, FaCcJcb, FaCcDiscover } from 'react-icons/Fa';
-import { SiAmericanexpress } from 'react-icons/si';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { FaCcVisa, FaCcMastercard, FaCcJcb, FaCcDiscover } from 'react-icons/Fa';
+import { useNavigate } from 'react-router-dom';
 import { clearCart, closeModalBuy } from '../../store/Slices/cartSlice';
 import { useAppDispatch } from './../../hooks';
 
@@ -81,7 +80,6 @@ const ModalBuy: React.FC = () => {
 
   const emailFieldHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
-    // [a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?
     if (!event.target.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) event.target.setCustomValidity(`Некорректный e-mail`);
     else event.target.setCustomValidity(``);
   };
@@ -141,7 +139,6 @@ const ModalBuy: React.FC = () => {
     if (number.startsWith('5')) return <FaCcVisa />;
     if (number.startsWith('4')) return <FaCcMastercard />;
     if (number.startsWith('3')) return <FaCcJcb />;
-    // if (number === '3') return <SiAmericanexpress />;
 
     return <BsCreditCardFill />;
   };
@@ -173,12 +170,8 @@ const ModalBuy: React.FC = () => {
 
         <div>
           <Text>Payment card</Text>
-          {/* prettier-ignore */}
-
           <CardNumberBox>
-            <CardIcon>
-              {getCardTypeByNumber(card)}              
-            </CardIcon>
+            <CardIcon>{getCardTypeByNumber(card)}</CardIcon>
             <Input
               type="text"
               value={card}
@@ -189,13 +182,28 @@ const ModalBuy: React.FC = () => {
               placeholder="card"
               required
             />
-            
           </CardNumberBox>
-          {/* prettier-ignore */}
           <InputRow>
-            <Input type="text" value={exp} minLength={5} maxLength={5} onChange={expCardFieldHandler} onKeyDown={cardFieldHandlerKey} placeholder="exp. 12/31" required />
-            {/* prettier-ignore */}
-            <Input type="text" value={ccv} minLength={3} maxLength={3} onChange={ccvCardFieldHandler} onKeyDown={cardFieldHandlerKey} placeholder="ccv" required />
+            <Input
+              type="text"
+              value={exp}
+              minLength={5}
+              maxLength={5}
+              onChange={expCardFieldHandler}
+              onKeyDown={cardFieldHandlerKey}
+              placeholder="exp. 12/31"
+              required
+            />
+            <Input
+              type="text"
+              value={ccv}
+              minLength={3}
+              maxLength={3}
+              onChange={ccvCardFieldHandler}
+              onKeyDown={cardFieldHandlerKey}
+              placeholder="ccv"
+              required
+            />
           </InputRow>
         </div>
         <ButtonBuy type="submit">Submit</ButtonBuy>
@@ -210,13 +218,11 @@ const Container = styled.div`
 
   background-color: rgba(99, 99, 99, 0.603);
   background-color: rgba(10, 25, 41, 0.603);
+  backdrop-filter: blur(1px);
 
   display: flex;
   justify-content: center;
-
   align-items: center;
-
-  backdrop-filter: blur(1px);
 `;
 
 const Form = styled.form`
@@ -271,7 +277,6 @@ const InputRow = styled.div`
 const Input = styled.input`
   width: 100%;
   padding: 15px 15px 12px 15px;
-
   margin-bottom: 6px;
 
   border: none;
@@ -280,7 +285,6 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
-
   &:focus:invalid {
     border-bottom: 4px solid #ff7730;
   }
@@ -307,12 +311,11 @@ const ButtonBuy = styled.button`
 `;
 
 const BuyAfterBox = styled.div`
-  background-color: var(--main-bg-color-2);
-
+  font-size: 18px;
   padding: 25px 50px;
   border-radius: 7px;
 
-  font-size: 18px;
+  background-color: var(--main-bg-color-2);
 `;
 
 export default ModalBuy;

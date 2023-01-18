@@ -86,7 +86,6 @@ const CartPage = () => {
             {cart.map((item, index) => {
               // Переписал код, чтоб index был учитывая все элементы ради ТЗ. До этого итерация была урезаного массива.
               if (index < start || index > start + limitOnPage - 1) return false;
-              // замучал TypeScript
               return <CartItem key={item.id} item={item} index={index} />;
             })}
           </ProductList>

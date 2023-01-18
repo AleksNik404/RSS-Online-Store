@@ -16,7 +16,6 @@ const PriceRange = () => {
   const input = React.useRef<HTMLInputElement>(null);
   const minMax = searchParams.get('minMaxPrice')?.split('↕');
 
-  //TODO: работать с редаксом
   // Если есть параметры ставлю с них диапозон. Иначе заглушку и после useffect выставит когда подсчитает другая функция актуальный min max
   const [firstThumb, setFirstThumb] = useState(minMax ? Number(minMax[0]) : minMaxPrice.min);
   const [secondThumb, setSecondThumb] = useState(minMax ? Number(minMax[1]) : minMaxPrice.max);
@@ -38,7 +37,6 @@ const PriceRange = () => {
   }, [dispatch, firstThumb, secondThumb]);
 
   const setMinHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(e);
     setFirstThumb(Number(e.target.value));
   };
 
@@ -69,7 +67,6 @@ const PriceRange = () => {
 
   return (
     <div className={style.sliderBox}>
-      {/* <RangeFillColor></RangeFillColor> */}
       <input
         className={style.slider}
         type="range"
@@ -95,15 +92,5 @@ const PriceRange = () => {
     </div>
   );
 };
-
-const RangeFillColor = styled.div`
-  /* height: 100%;
-  width: 100%;
-  background-color: red;
-
-  position: absolute;
-  left: 0;
-  top: 0; */
-`;
 
 export default PriceRange;

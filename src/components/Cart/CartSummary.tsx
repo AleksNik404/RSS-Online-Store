@@ -81,8 +81,6 @@ const CartSummary = () => {
 };
 
 const Container = styled.div`
-  /* text-align: center; */
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,7 +112,6 @@ const ActivePromo = styled.div`
 `;
 
 const Paragraph = styled.p`
-  /* width: max-content; */
   justify-self: center;
   text-align: center;
 `;
@@ -139,14 +136,12 @@ const Button = styled.button`
 `;
 
 const ButtonBuy = styled.button`
-  cursor: pointer;
-
   font-size: 18;
-  padding: 10px 20px;
   width: 200px;
-
+  padding: 10px 20px;
   border-radius: 2px;
 
+  cursor: pointer;
   transition: all 0.3s;
 
   background-color: var(--primary-btn-color-1);

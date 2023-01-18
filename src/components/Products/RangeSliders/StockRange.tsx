@@ -26,7 +26,7 @@ const StockRange = () => {
 
     setFirstThumb(minMaxStock.min);
     setSecondThumb(minMaxStock.max);
-  }, [minMax, minMaxStock, reset]);
+  }, [minMaxStock, reset]);
 
   // Долго мучал debounce из lodash но было куча багов, а в итоге обычный таймаут в useEffect все решил.
   useEffect(() => {

@@ -180,7 +180,6 @@ const Container = styled.div`
   gap: 60px;
 
   max-width: 1280px;
-
   padding: 0 20px;
 
   @media (max-width: 1050px) {
@@ -199,15 +198,12 @@ const ImagesBox = styled.div`
 `;
 
 const MainImgBox = styled.div`
-  /* width: 100%; */
   max-height: 600px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  /* align-items: flex-start; */
-
   border-radius: 5px;
   overflow: hidden;
+
+  display: flex;
+  justify-content: center;
 
   background-color: var(--main-bg-color-2);
 `;
@@ -222,21 +218,18 @@ const OtherImgsBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  /* grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 100px; */
-  /* max-height: 100px; */
 `;
 
 const SmImageBox = styled.div`
   max-height: 75px;
   max-width: 120px;
 
-  border-radius: 5px;
-  overflow: hidden;
-
   display: flex;
   justify-content: center;
   align-items: center;
+
+  border-radius: 5px;
+  overflow: hidden;
   cursor: pointer;
 `;
 

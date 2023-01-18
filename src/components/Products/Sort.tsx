@@ -36,23 +36,8 @@ const Sort = () => {
         <MenuItem value={SortDirection.NAME_Z_TO_A}>Z-A</MenuItem>
         <MenuItem value={SortDirection.PRICE_LOWER_TO}>Lower Price</MenuItem>
         <MenuItem value={SortDirection.PRICE_HIGHER_TO}>Higher Price</MenuItem>
-        {/* {currencies.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))} */}
       </TextField>
     </WidthBox>
-
-    /* <select onChange={sortHandler} value={sort}>
-          <option value="Sort options" disabled>
-            Sort options
-          </option>
-          <option value={SortDirection.NAME_A_TO_Z}>Sort By: A-Z</option>
-          <option value={SortDirection.NAME_Z_TO_A}>Sort By: Z-A</option>
-          <option value={SortDirection.PRICE_LOWER_TO}>Sort By: Lower Price</option>
-          <option value={SortDirection.PRICE_HIGHER_TO}>Sort By: Higher Price</option>
-        </select> */
   );
 };
 
