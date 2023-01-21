@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks';
-import { ProductType } from '../../store/data/data2';
-import { resetFilters, updateFiltersByquery } from '../../store/Slices/filtersSlice';
-import { clearQuery } from '../../store/Slices/productsSlice';
+import { useAppDispatch } from '../../../hooks';
+import { ProductType } from '../../../store/data/data2';
+import { resetFilters, updateFiltersByquery } from '../../../store/Slices/filtersSlice';
+import { clearQuery } from '../../../store/Slices/productsSlice';
 
 const Breadcrumbs: React.FC<{ product: ProductType }> = ({ product }) => {
   const dispatch = useAppDispatch();
