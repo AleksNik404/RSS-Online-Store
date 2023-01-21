@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React from 'react';
 import { ProductType } from '../../store/data/data2';
 import AddCart from '../Products/AddCart';
 import AddCartAndBuy from '../Products/AddCartAndBuy';

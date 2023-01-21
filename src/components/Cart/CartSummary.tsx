@@ -25,19 +25,17 @@ const CartSummary = () => {
     setActivatedPromocodes((cur) => cur.filter((activePromo) => activePromo.initials !== promoCode.initials));
   };
 
-  // При Изминение актив. промокодов, пересчитываем сумму скидки.
-  useEffect(() => {
-    const discounts = activatedPromocodes.reduce((discounts, promo) => discounts + promo.discount, 0);
-    setTotalDiscount(discounts);
-  }, [activatedPromocodes]);
-
   // localeStorage Promocodes
   useEffect(() => {
     const promoLocal = localStorage.getItem('Griz-promo');
     promoLocal && setActivatedPromocodes(JSON.parse(promoLocal));
   }, []);
 
+  // При Изминение актив. промокодов, пересчитываем сумму скидки. И сохранение в localStorage
   useEffect(() => {
+    const discounts = activatedPromocodes.reduce((discounts, promo) => discounts + promo.discount, 0);
+    setTotalDiscount(discounts);
+
     localStorage.setItem('Griz-promo', JSON.stringify(activatedPromocodes));
   }, [activatedPromocodes]);
 
@@ -51,19 +49,22 @@ const CartSummary = () => {
       <Paragraph>Products: {total_amount}</Paragraph>
       <Paragraph className={activatedPromocodes.length ? 'strikethrough' : ''}>Total: {total_price} $</Paragraph>
 
-      {activatedPromocodes.length > 0 && <NewPriceCalc price={total_price} discount={totalDiscount} />}
       {activatedPromocodes.length > 0 && (
-        <AppliedPromoCodes activatedPromocodes={activatedPromocodes} deletePromoHandler={deletePromoHandler} />
+        <>
+          <NewPriceCalc price={total_price} discount={totalDiscount} />
+          <AppliedPromoCodes activatedPromocodes={activatedPromocodes} deletePromoHandler={deletePromoHandler} />
+        </>
       )}
 
       <InputSearch type="search" placeholder="promocode" onChange={(event) => setPromoField(event.target.value)} />
+
       {foundPromo && (
         <div>
           {foundPromo.title} - {foundPromo.discount}% <button onClick={addPromoHandler}>add</button>
         </div>
       )}
-      <p>Promo for test: `RS`, `EPM`, `Griz`</p>
 
+      <p>Promo for test: `RS`, `EPM`, `Griz`</p>
       <ButtonBuy onClick={openModalBuyHandler}>Buy Now</ButtonBuy>
     </Container>
   );

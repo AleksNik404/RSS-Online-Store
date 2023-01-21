@@ -1,32 +1,29 @@
 import React, { useMemo, useState } from 'react';
 import styled from '@emotion/styled';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import Checkbox2 from './Checkbox';
+
 import { ProductType } from '../../store/data/data2';
 import { resetFilters } from '../../store/Slices/filtersSlice';
 import { clearQuery } from '../../store/Slices/productsSlice';
-import StockRange from './RangeSliders/StockRange';
-import PriceRange from './RangeSliders/PriceRange';
+import Checkbox2 from './Filters/Checkbox';
+import StockRange from './Filters/StockRange';
+import PriceRange from './Filters/PriceRange2';
+import List from './Filters/List';
 
 const Filters = () => {
   const { products } = useAppSelector((state) => state.products);
-  const { filterProducts } = useAppSelector((state) => state.products);
+
   const [copyButton, setCopyButton] = useState(false);
   const [resetButton, setResetButton] = useState(false);
 
   const dispatch = useAppDispatch();
 
-  // TODO: Оптимизировать функции и сделать уникальной, проблема в типизации была.
+  // Не нравится что похожие функции удваиваются. Попробовал снова в типизацию, и там не читаемых код выходит
   const brands = useMemo(() => products.map(({ brand }) => brand), [products]);
   const types = useMemo(() => products.map(({ category }) => category), [products]);
 
-  //FIXME: меня замучала ТС ошибка, потом разберусь c типизацией и DRY.
-  const getCountBrands = (name: string, arr: ProductType[]) => {
-    return arr.filter((item) => item.brand === name).length;
-  };
-  const getCountCategory = (name: string, arr: ProductType[]) => {
-    return arr.filter((item) => item.category === name).length;
-  };
+  const uniqBrands = useMemo(() => [...new Set(brands)], [brands]);
+  const uniqTypes = useMemo(() => [...new Set(types)], [types]);
 
   // Кнопка сброса фильтров, убрать фильтры в одном сторе, и вернуть дефелтное значение сортировки
   const resetOptions = () => {
@@ -52,28 +49,9 @@ const Filters = () => {
 
   return (
     <S_Filters>
-      <S_Heading>Brands</S_Heading>
-      <S_List>
-        {[...new Set(brands)].map((brand) => {
-          const allCount = getCountBrands(brand, products);
-          const filterCount = getCountBrands(brand, filterProducts);
+      <List items={uniqBrands} countByName="brand" typeCheckbox="brands" />
+      <List items={uniqTypes} countByName="category" typeCheckbox="categories" />
 
-          return <Checkbox2 type={'brands'} key={brand} filterCount={filterCount} allCount={allCount} brand={brand} />;
-        })}
-      </S_List>
-      <S_Heading>Categories</S_Heading>
-      <S_List>
-        {[...new Set(types)].map((category) => {
-          const allCount = getCountCategory(category, products);
-          const filterCount = getCountCategory(category, filterProducts);
-
-          return (
-            //prettier-ignore
-            <Checkbox2 type={'categories'} key={category} filterCount={filterCount} allCount={allCount} brand={category} />
-          );
-        })}
-        {/* TODO: Исправить именование и мб часть внести в компоненты или дать уникальность range */}
-      </S_List>
       <S_Heading>In Stock</S_Heading>
       <S_Stock>
         <StockRange />
@@ -101,15 +79,7 @@ const S_Filters = styled.article`
   gap: 20px;
 `;
 
-const S_List = styled.ul`
-  padding: 0;
-
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
-
-const S_Heading = styled.h4`
+export const S_Heading = styled.h4`
   padding: 10px 0px;
   text-transform: uppercase;
   border-bottom: 1px solid #555555;

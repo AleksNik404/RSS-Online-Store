@@ -14,14 +14,13 @@ const Breadcrumbs: React.FC<{ product: ProductType }> = ({ product }) => {
     dispatch(clearQuery());
   };
 
-  // Нужно учить TS.
-  const historyOneCategory = () => {
-    resetOptions();
-    dispatch(updateFiltersByquery({ categories: product.category, brands: '' }));
-  };
-  const historyTwoCategory = () => {
-    resetOptions();
-    dispatch(updateFiltersByquery({ categories: product.category, brands: product.brand }));
+  // Переделал 2 функцию в одну. Но не нравится что я типизировал как стринг string.
+  // const handlerHictoryBack = (categories: Pick<ProductType, 'category'>, brands?: Pick<ProductType, 'brand'>) => {
+  const handlerHistoryBack = (categories: string, brands?: string) => {
+    return () => {
+      resetOptions();
+      dispatch(updateFiltersByquery({ categories, brands }));
+    };
   };
 
   return (
@@ -29,10 +28,10 @@ const Breadcrumbs: React.FC<{ product: ProductType }> = ({ product }) => {
       <Link className="history-link" to="/" onClick={resetOptions}>
         Store
       </Link>
-      <Link className="history-link" to="/" onClick={historyOneCategory}>
+      <Link className="history-link" to="/" onClick={handlerHistoryBack(product.category)}>
         {product.category}
       </Link>
-      <Link className="history-link" to="/" onClick={historyTwoCategory}>
+      <Link className="history-link" to="/" onClick={handlerHistoryBack(product.category, product.brand)}>
         {product.brand}
       </Link>
       <span>{product.title}</span>

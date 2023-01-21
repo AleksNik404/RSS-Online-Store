@@ -1,13 +1,13 @@
 import React from 'react';
-import { updateBrands, updateCategories } from '../../store/Slices/filtersSlice';
-import { useAppSelector, useAppDispatch } from '../../hooks';
+import { updateBrands, updateCategories } from '../../../store/Slices/filtersSlice';
+import { useAppSelector, useAppDispatch } from '../../../hooks';
 
 import styled from '@emotion/styled';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { blue } from '@mui/material/colors';
 
-interface ICheckBox {
+export interface ICheckBox {
   type: 'brands' | 'categories';
   filterCount: number;
   allCount: number;
