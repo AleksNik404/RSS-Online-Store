@@ -9,8 +9,6 @@
   display: grid;
   grid-template-rows: 250px 1fr;
   gap: 10px;
-  /* overflow: hidden; */
-
   border-radius: 5px;
 }
 
@@ -40,9 +38,6 @@
 }
 
 .name {
-  /* white-space: nowrap; */
-  /* min-height: 2.5rem; */
-  /* flex-basis: 2.5rem; */
   flex: 1 0 2.5rem;
 }
 

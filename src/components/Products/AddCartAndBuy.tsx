@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { BsBagPlus } from 'react-icons/bs';
 import { ProductType } from '../../store/data/data2';
 import { addToCart, openModalBuy } from '../../store/Slices/cartSlice';
 import { useAppDispatch, useAppSelector } from './../../hooks';
@@ -28,12 +27,7 @@ const AddCartAndBuy: React.FC<ProductType> = (item) => {
     navigate('/cart');
   };
 
-  return (
-    <Button onClick={addCartHandler}>
-      {'Buy Now'}
-      {/* <BsBagPlus /> */}
-    </Button>
-  );
+  return <Button onClick={addCartHandler}>{'Buy Now'}</Button>;
 };
 
 const Button = styled.button`
@@ -41,7 +35,6 @@ const Button = styled.button`
 
   font-size: 14;
   padding: 6px 12px;
-
   border-radius: 2px;
 
   transition: all 0.3s;

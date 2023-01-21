@@ -99,8 +99,6 @@ const cartSlice = createSlice({
     clearCart(state) {
       state.cart = [];
       localStorage.removeItem('Griz-cart');
-      // state.total_amount=0;
-      // state.total_price=0;
     },
   },
 });

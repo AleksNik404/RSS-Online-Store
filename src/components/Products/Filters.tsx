@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import styled from '@emotion/styled';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import Checkbox2 from './Checkbox';
@@ -17,8 +17,8 @@ const Filters = () => {
   const dispatch = useAppDispatch();
 
   // TODO: Оптимизировать функции и сделать уникальной, проблема в типизации была.
-  const brands = products.map(({ brand }) => brand);
-  const types = products.map(({ category }) => category);
+  const brands = useMemo(() => products.map(({ brand }) => brand), [products]);
+  const types = useMemo(() => products.map(({ category }) => category), [products]);
 
   //FIXME: меня замучала ТС ошибка, потом разберусь c типизацией и DRY.
   const getCountBrands = (name: string, arr: ProductType[]) => {

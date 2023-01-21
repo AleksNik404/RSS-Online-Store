@@ -5,7 +5,6 @@ export type BRAND_OR_CATEGORY = 'brands' | 'categories';
 type UPDATE_TEXTFIELD_TYPE = { type: 'textField'; value: string };
 type UPDATE_BRANDS_TYPE = { value: string; isChecked: boolean };
 type UPDATE_CATEGORY_TYPE = { value: string; isChecked: boolean };
-// type UPDATE_GRIDMODE_TYPE = boolean;
 
 interface IFilterState {
   textField: string;
