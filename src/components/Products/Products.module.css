@@ -1,0 +1,48 @@
+.items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  column-gap: 20px;
+  row-gap: 40px;
+}
+
+.item {
+  display: grid;
+  grid-template-rows: 250px 1fr;
+  gap: 10px;
+  border-radius: 5px;
+}
+
+.imgBox {
+  overflow: hidden;
+  background-color: #333;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+}
+
+.img {
+  max-height: 80%;
+  max-width: 85%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.name {
+  flex: 1 0 2.5rem;
+}
+
+.priceBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

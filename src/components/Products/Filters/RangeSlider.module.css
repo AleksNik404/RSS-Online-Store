@@ -1,0 +1,19 @@
+.sliderBox {
+  padding: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  position: relative;
+}
+
+.slider {
+  width: 100%;
+}
+
+.amount {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 25px;
+}

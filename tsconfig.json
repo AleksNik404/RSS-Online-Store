@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "module": "es6",
+    "moduleResolution": "node",
+    "target": "es6",
+    "allowJs": true,
+    "lib": ["esnext", "dom"],
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "types": ["react/next", "react-dom/next"],
+    "jsxImportSource": "@emotion/react"
+  },
+  "include": ["src", "./declaration.d.ts"]
+  // "files": ["src/index.tsx"]
+}
