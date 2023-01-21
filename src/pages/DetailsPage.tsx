@@ -1,60 +1,31 @@
-import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { resetFilters, updateFiltersByquery } from '../store/Slices/filtersSlice';
-import { clearQuery } from '../store/Slices/productsSlice';
+import { useAppSelector } from '../hooks';
 import ErrorPage from './ErrorPage';
 import AddCart from '../components/Products/AddCart';
 import AddCartAndBuy from '../components/Products/AddCartAndBuy';
+import Breadcrumbs from '../components/Details/Breadcrumbs';
+import DetailsBoxRow from '../components/Details/DetailsBoxRow';
 
 const DetailsPage = () => {
   const { products } = useAppSelector((state) => state.products);
-  const dispatch = useAppDispatch();
-
   const { id } = useParams();
+
   const product = products.find((item) => item.id === Number(id));
 
-  const [selectedImg, setSelectedImg] = useState(product?.images[0]);
+  const [selectedImg, setSelectedImg] = useState<string | undefined>(product?.images[0]);
 
   const selectImgHandler = (index: number) => {
     setSelectedImg(product?.images[index]);
-  };
-
-  const resetOptions = () => {
-    dispatch(resetFilters());
-    dispatch(clearQuery());
-  };
-
-  // Нужно учить TS. Уже какой раз спотыкаюсь сделать универсальный метод, но тс не дает.
-  const historyHandler1 = () => {
-    // TODO: Не обновляялось почему-то query пришлось на прямую стирать всё -_-
-    resetOptions();
-    dispatch(updateFiltersByquery({ categories: product?.category, brands: '' }));
-  };
-  const historyHandler2 = () => {
-    // TODO: Не обновляялось почему-то query пришлось на прямую стирать всё -_-
-    resetOptions();
-    dispatch(updateFiltersByquery({ categories: product?.category, brands: product?.brand }));
   };
 
   if (!product) return <ErrorPage />;
 
   return (
     <Container className="container">
-      <History>
-        <Link className="history-link" to="/" onClick={resetOptions}>
-          Store
-        </Link>
-        <Link className="history-link" to="/" onClick={historyHandler1}>
-          {product.category}
-        </Link>
-        <Link className="history-link" to="/" onClick={historyHandler2}>
-          {product.brand}
-        </Link>
-        <span>{product.title}</span>
-      </History>
+      <Breadcrumbs product={product} />
       <ImagesBox>
         <OtherImgsBox>
           {product.images.map((img, index) => (
@@ -69,22 +40,10 @@ const DetailsPage = () => {
       </ImagesBox>
       <DetailsBox>
         <DetailsBox__heading>{product.title}</DetailsBox__heading>
-        <DetailsBox__row>
-          <p>Category</p>
-          <p>{product.category}</p>
-        </DetailsBox__row>
-        <DetailsBox__row>
-          <p>Manufacturer</p>
-          <p>{product.Manufacturer}</p>
-        </DetailsBox__row>
-        <DetailsBox__row>
-          <p>Brand</p>
-          <p>{product.brand}</p>
-        </DetailsBox__row>
-        <DetailsBox__row>
-          <p>Stock</p>
-          <p>{product.stock}</p>
-        </DetailsBox__row>
+        <DetailsBoxRow text="Category" value={product.category} />
+        <DetailsBoxRow text="Manufacturer" value={product.Manufacturer} />
+        <DetailsBoxRow text="Brand" value={product.brand} />
+        <DetailsBoxRow text="Stock" value={product.stock} />
         <Price>
           <p>{product.price}$</p>
         </Price>
@@ -101,30 +60,6 @@ const DetailsPage = () => {
     </Container>
   );
 };
-
-const History = styled.div`
-  grid-column: 1 / -1;
-  justify-self: start;
-
-  display: flex;
-  gap: 5px;
-
-  & > .history-link {
-    transition: all 0.2s;
-  }
-
-  & > .history-link:hover {
-    color: var(--primary-btn-color-6);
-  }
-
-  & > .history-link::after {
-    content: '/';
-    display: inline-block;
-    margin-left: 5px;
-
-    pointer-events: none;
-  }
-`;
 
 const DetailsBox = styled.div`
   display: grid;
