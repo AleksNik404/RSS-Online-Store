@@ -2,43 +2,44 @@ import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import { IPromoCode, openModalBuy } from '../../store/Slices/cartSlice';
-import ModalBuy from './ModalBuy';
 import { useAppDispatch } from './../../hooks';
+import AppliedPromoCodes from './AppliedPromoCodes';
+import NewPriceCalc from './NewPriceCalc';
 
 const CartSummary = () => {
-  const { total_amount, total_price, promocodes, modelBuyIsOpen } = useAppSelector((state) => state.cart);
+  const { total_amount, total_price, promocodes } = useAppSelector((state) => state.cart);
   const dispath = useAppDispatch();
 
   const [promoField, setPromoField] = useState('');
-  const [activatedPromo, setActivatedPromo] = useState<IPromoCode[]>([]);
+  const [activatedPromocodes, setActivatedPromocodes] = useState<IPromoCode[]>([]);
   const [totalDiscount, setTotalDiscount] = useState(0);
 
-  const promo = promocodes.find((promo) => promo.initials === promoField);
+  const foundPromo = promocodes.find((promocodeInState) => promocodeInState.initials === promoField);
 
   // Добавление и удаление объекта промокодов из массива активированных
   const addPromoHandler = () => {
-    if (promo && activatedPromo.every((promo) => promo.initials !== promoField))
-      setActivatedPromo((cur) => [...cur, promo]);
+    if (foundPromo && activatedPromocodes.every((activePromo) => activePromo.initials !== promoField))
+      setActivatedPromocodes((cur) => [...cur, foundPromo]);
   };
   const deletePromoHandler = (promoCode: IPromoCode) => {
-    setActivatedPromo((cur) => cur.filter((promo) => promo.initials !== promoCode.initials));
+    setActivatedPromocodes((cur) => cur.filter((activePromo) => activePromo.initials !== promoCode.initials));
   };
 
   // При Изминение актив. промокодов, пересчитываем сумму скидки.
   useEffect(() => {
-    const discounts = activatedPromo.reduce((discounts, promo) => discounts + promo.discount, 0);
+    const discounts = activatedPromocodes.reduce((discounts, promo) => discounts + promo.discount, 0);
     setTotalDiscount(discounts);
-  }, [activatedPromo]);
+  }, [activatedPromocodes]);
 
   // localeStorage Promocodes
   useEffect(() => {
     const promoLocal = localStorage.getItem('Griz-promo');
-    promoLocal && setActivatedPromo(JSON.parse(promoLocal));
+    promoLocal && setActivatedPromocodes(JSON.parse(promoLocal));
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('Griz-promo', JSON.stringify(activatedPromo));
-  }, [activatedPromo]);
+    localStorage.setItem('Griz-promo', JSON.stringify(activatedPromocodes));
+  }, [activatedPromocodes]);
 
   const openModalBuyHandler = () => {
     dispath(openModalBuy());
@@ -46,31 +47,19 @@ const CartSummary = () => {
 
   return (
     <Container>
-      {/* {modelBuyIsOpen && <ModalBuy />} */}
       <h2>Summary</h2>
       <Paragraph>Products: {total_amount}</Paragraph>
-      <Paragraph className={activatedPromo.length ? 'strikethrough' : ''}>Total: {total_price} $</Paragraph>
+      <Paragraph className={activatedPromocodes.length ? 'strikethrough' : ''}>Total: {total_price} $</Paragraph>
 
-      {activatedPromo.length > 0 && <p>Total: {(total_price - (total_price / 100) * totalDiscount).toFixed(2)} $</p>}
-      {activatedPromo.length > 0 && (
-        <ActivePromoBox>
-          <Paragraph>Applied codes</Paragraph>
-          {activatedPromo.map((promo) => {
-            return (
-              <ActivePromo key={promo.initials}>
-                <p>{promo.title}</p>
-                <p>{promo.discount}%</p>
-                <Button onClick={() => deletePromoHandler(promo)}>Drop</Button>
-              </ActivePromo>
-            );
-          })}
-        </ActivePromoBox>
+      {activatedPromocodes.length > 0 && <NewPriceCalc price={total_price} discount={totalDiscount} />}
+      {activatedPromocodes.length > 0 && (
+        <AppliedPromoCodes activatedPromocodes={activatedPromocodes} deletePromoHandler={deletePromoHandler} />
       )}
 
       <InputSearch type="search" placeholder="promocode" onChange={(event) => setPromoField(event.target.value)} />
-      {promo && (
+      {foundPromo && (
         <div>
-          {promo.title} - {promo.discount}% <button onClick={addPromoHandler}>add</button>
+          {foundPromo.title} - {foundPromo.discount}% <button onClick={addPromoHandler}>add</button>
         </div>
       )}
       <p>Promo for test: `RS`, `EPM`, `Griz`</p>
@@ -91,48 +80,9 @@ const Container = styled.div`
   }
 `;
 
-const ActivePromoBox = styled.div`
-  border: 1px solid var(--main-bg-color-5);
-  padding: 10px 15px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-`;
-
-const ActivePromo = styled.div`
-  display: grid;
-  gap: 10px;
-  justify-items: start;
-  align-items: center;
-
-  width: 300px;
-
-  grid-template-columns: 200px max-content max-content;
-`;
-
 const Paragraph = styled.p`
   justify-self: center;
   text-align: center;
-`;
-
-const Button = styled.button`
-  cursor: pointer;
-  transition: all 0.2s;
-
-  background-color: transparent;
-  color: var(--main-bg-color-8);
-  border: 1px solid var(--main-bg-color-8);
-
-  &:hover {
-    border-color: var(--secondary-btn-color-2);
-    color: var(--secondary-btn-color-2);
-  }
-
-  &:active {
-    border-color: var(--secondary-btn-color-1);
-    color: var(--secondary-btn-color-1);
-  }
 `;
 
 const ButtonBuy = styled.button`
